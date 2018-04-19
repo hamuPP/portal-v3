@@ -50,10 +50,12 @@
                     </button>
                 </template>
                 <template v-else>
-                    <button type='submit' class='btn btn-primary'>
+                    <button type='button' class='btn btn-primary'>
                         <img src='./assets/images/loading_white.gif' width='20'>
                     </button>
                 </template>
+
+                <button type="button" @click="toMockPage">to mock page</button>
             </form>
         </div>
         <!--<div class='footer'>-->
@@ -124,6 +126,11 @@
                     };
                     that.$store.dispatch('login', {reqData});
                 }
+            },
+
+            toMockPage() {
+                this.$router.push({path: '/mock'});
+//                this.$router.push({ path: '/login' });
             }
         }
     }
