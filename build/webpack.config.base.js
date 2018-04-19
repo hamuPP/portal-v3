@@ -12,7 +12,8 @@ const getVueLoaderConfig = require('./vue-loader.conf')
 const webpackAppConfig = appConfig.webpack
 
 // 版本号
-const appVersion = new Date().getTime()
+const appVersion = new Date().getTime();
+const md5Script = '';
 
 function resolve(dir) {
     console.log('ppp', process.cwd());
