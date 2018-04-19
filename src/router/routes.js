@@ -1,10 +1,11 @@
-// import Index from '../components/index/index.vue'
 import Login from '../login.vue'
+// import Index from '../components/index/index.vue'
+import mock from '../components/mock.vue'
 
 const routes = [
     {
         path: '/',
-        redirect: '/login'
+        redirect: '/mock'
     },
     {
         path: '/login',
@@ -25,7 +26,13 @@ const routes = [
     //             }
     //         }
     //     ]
-    // }
+    // },
+    {
+        path: '/mock',
+        component: mock,
+        meta: {title: 'mock'},
+
+    }
 
 ];
 

@@ -47,18 +47,17 @@
     import Agency from '../agency/Agency.vue'
     //    import AgencyFull from '../agency/AgencyFull.vue'
 
-
     import PromptTpl from '../common/PromptTpl.vue'
     import editComponent from '../assembly/EditComponent.vue'
     import pwdTpl from '../basic/PasswordTpl.vue'
     import commonMethods from '../../vuex/modules/commonMethods'
 
-    import {mapGetters} from "vuex"
+    import {mapGetters} from 'vuex'
     export default{
-        name:'HomePage.vue',
+        name: 'HomePage.vue',
         computed: mapGetters({
-            /*是否弹出编辑组件弹框*/
-            showEditComponent:'showEditComponent'
+            /* 是否弹出编辑组件弹框 */
+            showEditComponent: 'showEditComponent'
         }),
         components: {
             Loading,
@@ -71,35 +70,33 @@
             pwdTpl
         },
         methods: {
-            logoHref(){
-                this.$router.push({path:"/index"});
+            logoHref() {
+                this.$router.push({path: '/index'});
             },
 
-            getUserData(){
+            getUserData() {
                 let reqData = {};
-                /*获取用户信息*/
+                /* 获取用户信息 */
 //                debugger;
-                this.$store.dispatch('getUserData',{ reqData });
+                this.$store.dispatch('getUserData', { reqData });
             }
         },
-        mounted(){
-            let that =this;
-            that.$nextTick(()=>{
-                /*隐藏地图*/
+        mounted() {
+            let that = this;
+            that.$nextTick(() => {
+                /* 隐藏地图 */
                 this.$store.dispatch('mapHide');
-
             });
         },
         created() {
             let that = this;
-            let CM = new commonMethods();
+            const CM = new commonMethods();
             CM.clearConsole();
             /* 获取用户信息 --by ty 2018年03月08日11:49:49 */
             that.getUserData();
-            setTimeout(()=>{
+            setTimeout(() => {
                 CM.clearConsole();
-            },1500);
+            }, 1500);
         }
     }
-
 </script>
