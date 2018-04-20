@@ -1,17 +1,15 @@
-/**
- * Created by liuzhengdong on 2017/7/6.
- */
-const path = require('path')
-const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const config = require('./webpack.config.base')('prod')
-const postcss = require('./postcss.conf')()
 
-config.output.filename = '[name].[chunkhash:7].js'
-config.output.chunkFilename = '[id].[chunkhash:7].js'
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+const config = require('./webpack.config.base')('prod');
+const postcss = require('./postcss.conf')();
 
-config.devtool = false
+config.output.filename = '[name].[chunkhash:7].js';
+config.output.chunkFilename = '[id].[chunkhash:7].js';
+
+config.devtool = false;
 
 config.module.rules.push(
     {
@@ -21,8 +19,7 @@ config.module.rules.push(
             fallback: 'style-loader',
         })
     }
-)
-
+);
 config.plugins = (config.plugins || []).concat([
     new webpack.LoaderOptionsPlugin({
         // webpack 2.0之后,这边不配置px转rem不会成功！！！蛋疼
@@ -62,6 +59,6 @@ config.plugins = (config.plugins || []).concat([
     //         autoprefixer: false,
     //     },
     // }),
-])
+]);
 
-module.exports = config
+module.exports = config;

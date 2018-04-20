@@ -1,5 +1,5 @@
 {
-	"name": "tarot-koa2-vue2",
+	"name": "portal-v3",
 	"version": "1.0.0",
 	"description": "website by koa2+vue2+webpack",
 	"scripts": {
@@ -11,14 +11,13 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/hamuPP/t-vue-tree.git"
+		"url": "git+https://github.com/hamuPP/portal-v3.git"
 	},
 	"author": "",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/hamuPP/t-vue-tree/issues"
+		"url": "https://github.com/hamuPP/portal-v3.git/issues"
 	},
-	"homepage": "https://github.com/hamuPP/t-vue-tree#readme",
 	"devDependencies": {
 		"autoprefixer": "^8.1.0",
 		"axios": "^0.18.0",
