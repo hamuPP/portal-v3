@@ -4,6 +4,7 @@
 
 import * as common from '../CommonConst'
 import axios from 'axios'
+import Md5 from '../md5'
 
 const state = {
     /* 登录后的信息 */
@@ -42,15 +43,14 @@ const actions = {
     },
 
     login({commit}, {reqData}) {
-        console.log(reqData);
-        // console.log(url);
-        // reqData.url = common.getUrl({url: common.LOGIN});
-        // let reqData = {};
-        let md5PWD = 'abcdefg';// TODO md5转码
+        let _md5 = new Md5();
+        let md5PWD = _md5.hexMd5(reqData.password); // 加密
         let passwordMd5Upper = md5PWD.toUpperCase();
         axios({
             method: 'post',
             url: common.getUrl({url: common.LOGIN}),
+            // ContentType: 'application/x-www-form-urlencoded',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
             data: {
                 username: reqData.username,
                 password: passwordMd5Upper
@@ -62,6 +62,7 @@ const actions = {
         }).catch(e => {
             console.log(e)
             debugger;
+            commit(common.LOGIN_DATA, {data: e});
         });
     }
 };

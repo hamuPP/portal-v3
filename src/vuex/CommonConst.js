@@ -14,7 +14,7 @@ export const API_PRE = 'api/';
 export const GATEWAY_PORTAL = 'portal/';
 
 export const GET_BALL_LIST_DATA = 'mockData/ballList.json';
-export const LOGIN = GATEWAY_PORTAL + 'login';
+export const LOGIN = 'login';
 // 请求地址 --end--
 
 export const getUrl = function(urlObj) {
