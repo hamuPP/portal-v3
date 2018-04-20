@@ -18,7 +18,7 @@ import '@/assets/css/main.less'
 // vue config配置文件
 // import './config'
 
-import App from './login.vue'
+import App from './app.vue'
 
 Vue.use(VueRouter);
 Vue.use(iView);

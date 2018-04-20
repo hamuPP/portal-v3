@@ -16,7 +16,8 @@ const appVersion = new Date().getTime();
 const md5Script = '';
 
 function resolve(dir) {
-    console.log('ppp', process.cwd());
+    console.log('pppggg', process.cwd());
+    console.log('pppggglll', path.resolve(process.cwd(), dir));
     return path.resolve(process.cwd(), dir)
 }
 
@@ -45,7 +46,7 @@ module.exports = function (env) {
             // 别名，可以直接使用别名来代表设定的路径以及其他
             alias: {
                 'vue': 'vue/dist/vue.esm.js',
-                '@config': resolve('config'),
+                // '@config': resolve('config'),
                 '@build': resolve('build'),
                 // '@': resolve('client'),//别人的原来写法
                 '@': resolve('src'),

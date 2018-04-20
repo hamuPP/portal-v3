@@ -1,11 +1,11 @@
-import Login from '../login.vue'
+import Login from '../components/login/login.vue'
 // import Index from '../components/index/index.vue'
 import mock from '../components/mock.vue'
 
 const routes = [
     {
         path: '/',
-        redirect: '/mock'
+        redirect: '/login'
     },
     {
         path: '/login',

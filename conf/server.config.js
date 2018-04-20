@@ -4,10 +4,10 @@
 const constants = require('./constants');
 const common = 'test';
 module.exports = {
-  appPort: 7001,
-  proxy: {
-    '/api/test': constants.loginTargets[common],
-    '/v3/assistant': 'http://restapi.amap.com/v3/',
-      // '/test':'../test'
-  },
+    appPort: 7001,
+    proxy: {
+        '/v3/assistant': 'http://restapi.amap.com/v3/',
+        '/api/portal/login': 'http://192.168.0.101:10303/',
+        '/api': 'http://192.168.0.101:10303',
+    },
 };

@@ -36,21 +36,22 @@ function getProxyConfig () {
  */
 module.exports = function () {
   async function preProxyMiddleware (ctx, next) {
-    const url = ctx.url
-    logger.info(`Request '${url}'`)
-    let proxyTarget
-    let proxyConfig = getProxyConfig()
+    const url = ctx.url;
+    logger.info(`Request '${url}'`);
+    let proxyTarget;
+    let proxyConfig = getProxyConfig();
     // 在appConfig.proxy中寻找匹配前缀的代理
     for (const [prefix, target] of Object.entries(proxyConfig)) {
       if (url.startsWith(prefix)) {
         // 匹配替换
-        if (!IS_DEBUG) {
-          ctx.url = url.replace(prefix, '')
-        }
-        proxyTarget = target
-        ctx._proxyTarget = proxyTarget
+          console.log('IS_DEBUG', IS_DEBUG);// 生产模式为tre
+        // if (!IS_DEBUG) {
+          ctx.url = url.replace(prefix, '');
+        // }
+        proxyTarget = target;
+        ctx._proxyTarget = proxyTarget;
 
-        logger.info(`Match to proxy: '${prefix}' => '${proxyTarget}'`)
+        logger.info(`Match to proxy: '${prefix}' => '${proxyTarget}'`);
         break
       }
     }
@@ -59,7 +60,7 @@ module.exports = function () {
       // console.log(Promise.resolve());
       return Promise.resolve()
     }
-    logger.info(`Will be Agent to '${proxyTarget + ctx.url}'`)
+    logger.info(`Will be Agent to '${proxyTarget + ctx.url}'`);
     return next()
   }
 

@@ -32,7 +32,8 @@ config.module.rules.push(
             'stylus-loader'
         ],
     }
-)
+);
+
 config.plugins = (config.plugins || []).concat([
     //你可以理解为，通过配置了DefinePlugin，那么这里面的标识就相当于全局变量，你的业务代码可以直接使用配置的标识。
     new webpack.DefinePlugin({

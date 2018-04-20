@@ -3,7 +3,7 @@
 * Created by tr on 2017/6/27.                                        *
 *********************************************************************/
 <style scoped lang='less'>
-    @import 'assets/css/login.less';
+    @import '../../assets/css/login.less';
 </style>
 <template>
     <div id='Login' class='Login'>
@@ -16,18 +16,18 @@
             <div class='header'>
                 <h3>统一业务平台</h3>
                 <h4>UNIFIED SERVICE PLATFORM</h4>
-                <img src='./assets/images/login-avatar.png' alt='avatar'/>
+                <img src='../../assets/images/login-avatar.png' alt='avatar'/>
             </div>
             <form>
                 <div class='control-group'>
-                    <label><img src='./assets/images/account.png' alt='account'/><span>账号</span></label>
+                    <label><img src='../../assets/images/account.png' alt='account'/><span>账号</span></label>
                     <input type='text' class='form-control'
                            placeholder='请输入用户名' required='true' v-model='userName'>
                 </div>
 
 
                 <div class='control-group'>
-                    <label><img src='./assets/images/pwd.png' alt='account'/><span>密码</span></label>
+                    <label><img src='../../assets/images/pwd.png' alt='account'/><span>密码</span></label>
                     <input class='form-control'
                            type='password' style=''
                            placeholder='密 码' required='true'  v-model='password'>
@@ -51,7 +51,7 @@
                 </template>
                 <template v-else>
                     <button type='button' class='btn btn-primary'>
-                        <img src='./assets/images/loading_white.gif' width='20'>
+                        <img src='../../assets/images/loading_white.gif' width='20'>
                     </button>
                 </template>
 
@@ -96,17 +96,18 @@
              * @param val 返回的数据信息
              */
             loginData(val) {
-                const that = this;
-
-                that.loginDataValue = val.msg;
-                that.isShow = true;
-                /* 2s后信息自动隐藏 */
-                if (val) {
-                    setTimeout(function () {
-                        that.loginDataValue = '';
-                        that.isShow = false;
-                    }, 2000);
-                }
+                debugger;
+                // const that = this;
+                //
+                // that.loginDataValue = val.msg;
+                // that.isShow = true;
+                // /* 2s后信息自动隐藏 */
+                // if (val) {
+                //     setTimeout(function () {
+                //         that.loginDataValue = '';
+                //         that.isShow = false;
+                //     }, 2000);
+                // }
             }
         },
         methods: {

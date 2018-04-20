@@ -9,6 +9,7 @@ const currentIP = require('ip').address()
 const { IS_DEBUG } = require('../utils/env')
 const appConfig = require('../../conf/app')
 
+//过滤向服务器请求的资源地址
 const defaultOptions = { include: /^\/(api|static|public|v3)/ };//原作者的写法，我需要json也读取，所以改成如下
 // const defaultOptions = { include: /(^\/(api|static|public|v3))|(.json$)/ };//原作者的写法，我需要json也读取
 
@@ -39,7 +40,7 @@ module.exports = function (options) {
   options = Object.assign({}, defaultOptions, options)
   return async function spa (ctx, next) {
       console.log(ctx.url);
-      console.log(options.include.test(ctx.url));
+      console.log(options.include.test(ctx.url));// 向服务器请求的为true
     if (!options.include.test(ctx.url)) {
     // if (false) {
       /**
