@@ -96,18 +96,30 @@
              * @param val 返回的数据信息
              */
             loginData(val) {
-                debugger;
+                let that = this;
+                console.log(val);// data.meta.code
+                if (val && val.meta && val.meta.code === 1) {
+                    if (val.meta.code === 1) {
+                        that.$router.push({path: '/mock'});
+                        that.isShow = true;
+                        that.loginDataValue = val.msg;
+                    } else {
+                        that.loginDataValue = val.meta.message || '网络错误';
+                    }
+                } else {
+                    that.loginDataValue = '网络错误';
+                }
                 // const that = this;
                 //
                 // that.loginDataValue = val.msg;
                 // that.isShow = true;
-                // /* 2s后信息自动隐藏 */
-                // if (val) {
-                //     setTimeout(function () {
-                //         that.loginDataValue = '';
-                //         that.isShow = false;
-                //     }, 2000);
-                // }
+                 /* 2s后信息自动隐藏 */
+                 if (val) {
+                     setTimeout(function() {
+                         that.loginDataValue = '';
+                         that.isShow = false;
+                     }, 2000);
+                 }
             }
         },
         methods: {

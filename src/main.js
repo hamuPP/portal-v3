@@ -25,7 +25,7 @@ Vue.use(iView);
 
 // 设置路由
 const router = new VueRouter({
-    // mode: 'history',
+    mode: 'hash',
     routes
 });
 router.beforeEach((to, from, next) => {
