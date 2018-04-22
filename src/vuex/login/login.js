@@ -44,8 +44,10 @@ const actions = {
 
     login({commit}, {reqData}) {
         let _md5 = new Md5();
+        console.log(reqData.password);
         let md5PWD = _md5.hexMd5(reqData.password); // 加密
         let passwordMd5Upper = md5PWD.toUpperCase();
+        console.log(md5PWD);
         axios({
             method: 'post',
             url: common.getUrl({url: common.LOGIN}),
@@ -53,8 +55,15 @@ const actions = {
             headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
             data: {
                 username: reqData.username,
-                password: passwordMd5Upper
-            }
+                password: 'E10ADC3949BA59ABBE56E057F20F883E'
+            },
+            transformRequest: [function (data) {
+                let ret = ''
+                for (let it in data) {
+                    ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                }
+                return ret
+            }],
         }).then(res => {
             console.log(res)
             debugger;

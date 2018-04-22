@@ -7,6 +7,8 @@
 
 ```
 ├── build/    (打包指令 )
+├── conf/    (服务配置文件 )
+├		├── server.config.js  (服务端代理)
 ├── src/      (开发用的目录 )
 ├		├── assets/  (静态资源)
 ├		├── components/  (功能模块/业务模块)

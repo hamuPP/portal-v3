@@ -1,5 +1,5 @@
 /**
- * Created by ty on 18/4/21.
+ * Created by ty on 18/3/7.
  */
 class MD5 {
     constructor() {
@@ -13,47 +13,24 @@ class MD5 {
 
     hexMd5(s) {
         let that = this;
-        return that.binl2hex(that.coreMd5(that.that.str2binl(s), s.length * that.chrsz));
+        return that.binl2hex(that.coreMd5(that.str2binl(s), s.length * that.chrsz));
     }
 
-    b64Md5(s) {
+    binl2hex(binarray) {
         let that = this;
-        return that.binl2b64(that.coreMd5(that.str2binl(s), s.length * that.chrsz));
+
+        let hexTab = that.hexcase ? '0123456789ABCDEF' : '0123456789abcdef';
+        let str = '';
+        for (let i = 0; i < binarray.length * 4; i++) {
+            str += hexTab.charAt((binarray[i >> 2] >> ((i % 4) * 8 + 4)) & 0xF) +
+                hexTab.charAt((binarray[i >> 2] >> ((i % 4) * 8)) & 0xF);
+        }
+        return str;
     }
 
-    strMd5(s) {
-        let that = this;
-        return that.binl2str(that.coreMd5(that.str2binl(s), s.length * that.chrsz));
-    }
-
-    hexHmacMd5(key, data) {
-        let that = this;
-        return that.binl2hex(that.coreHmacMd5(key, data));
-    }
-
-    b64HmacMd5(key, data) {
-        let that = this;
-        return that.binl2b64(that.coreHmacMd5(key, data));
-    }
-
-    strHmacMd5(key, data) {
-        let that = this;
-        return that.binl2str(that.coreHmacMd5(key, data));
-    }
-
-    /*
-     * Perform a simple self-test to see if the VM is working
-     */
-    md5VmTest() {
-        let that = this;
-        return that.hexMd5('abc') === '900150983cd24fb0d6963f7d28e17f72';
-    }
-
-    /*
-     * Calculate the MD5 of an array of little-endian words, and a bit length
-     */
     coreMd5(x, len) {
         let that = this;
+
         /* append padding */
         x[len >> 5] |= 0x80 << ((len) % 32);
         x[(((len + 64) >>> 9) << 4) + 14] = len;
@@ -135,12 +112,18 @@ class MD5 {
             c = that.safeAdd(c, oldc);
             d = that.safeAdd(d, oldd);
         }
-        return Array(a, b, c, d);
+        return [a, b, c, d];
     }
 
-    md5Cmn(q, a, b, x, s, t) {
+    str2binl(str) {
         let that = this;
-        return that.safeAdd(that.bitRol(that.safeAdd(that.safeAdd(a, q), that.safeAdd(x, t)), s), b);
+
+        let bin = [];
+        let mask = (1 << that.chrsz) - 1;
+        for (let i = 0; i < str.length * that.chrsz; i += that.chrsz) {
+            bin[i >> 5] |= (str.charCodeAt(i / that.chrsz) & mask) << (i % 32);
+            return bin;
+        }
     }
 
     md5Ff(a, b, c, d, x, s, t) {
@@ -153,6 +136,21 @@ class MD5 {
         return that.md5Cmn((b & d) | (c & (~d)), a, b, x, s, t);
     }
 
+    md5Cmn(q, a, b, x, s, t) {
+        let that = this;
+        return that.safeAdd(that.bitRol(that.safeAdd(that.safeAdd(a, q), that.safeAdd(x, t)), s), b);
+    }
+
+    safeAdd(x, y) {
+        let lsw = (x & 0xFFFF) + (y & 0xFFFF);
+        let msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+        return (msw << 16) | (lsw & 0xFFFF);
+    }
+
+    bitRol(num, cnt) {
+        return (num << cnt) | (num >>> (32 - cnt));
+    }
+
     md5Hh(a, b, c, d, x, s, t) {
         let that = this;
         return that.md5Cmn(b ^ c ^ d, a, b, x, s, t);
@@ -162,102 +160,6 @@ class MD5 {
         let that = this;
         return that.md5Cmn(c ^ (b | (~d)), a, b, x, s, t);
     }
-
-    /*
-     * Calculate the HMAC-MD5, of a key and some data
-     */
-    coreHmacMd5(key, data) {
-        let that = this;
-        let bkey = that.str2binl(key);
-        let chrsz = that.chrsz;
-        if (bkey.length > 16) bkey = that.coreMd5(bkey, key.length * chrsz);
-        let ipad = Array(16), opad = Array(16);
-        for (let i = 0; i < 16; i++) {
-            ipad[i] = bkey[i] ^ 0x36363636;
-            opad[i] = bkey[i] ^ 0x5C5C5C5C;
-        }
-        let hash = that.coreMd5(ipad.concat(that.str2binl(data)), 512 + data.length * chrsz);
-        return that.coreMd5(opad.concat(hash), 512 + 128);
-    }
-
-    /*
-     * Add integers, wrapping at 2^32. This uses 16-bit operations internally
-     * to work around bugs in some JS interpreters.
-     */
-    safeAdd(x, y) {
-        let that = this;
-        let lsw = (x & 0xFFFF) + (y & 0xFFFF);
-        let msw = (x >> 16) + (y >> 16) + (lsw >> 16);
-        return (msw << 16) | (lsw & 0xFFFF);
-    }
-
-    /*
-     * Bitwise rotate a 32-bit number to the left.
-     */
-    bitRol(num, cnt) {
-        let that = this;
-        return (num << cnt) | (num >>> (32 - cnt));
-    }
-
-    /*
-     * Convert a string to an array of little-endian words
-     * If chrsz is ASCII, characters >255 have their hi-byte silently ignored.
-     */
-    str2binl(str) {
-        let that = this;
-        let bin = [];
-        let mask = (1 << that.chrsz) - 1;
-        for (let i = 0; i < str.length * that.chrsz; i += that.chrsz)
-            bin[i >> 5] |= (str.charCodeAt(i / that.chrsz) & mask) << (i % 32);
-        return bin;
-    }
-
-    /*
-     * Convert an array of little-endian words to a string
-     */
-    binl2str(bin) {
-        let that = this;
-        let chrsz = that.chrsz;
-        let str = "";
-        let mask = (1 << chrsz) - 1;
-        for (let i = 0; i < bin.length * 32; i += chrsz)
-            str += String.fromCharCode((bin[i >> 5] >>> (i % 32)) & mask);
-        return str;
-    }
-
-    /*
-     * Convert an array of little-endian words to a hex string.
-     */
-    binl2hex(binarray) {
-        let that = this;
-        let hex_tab = that.hexcase ? "0123456789ABCDEF" : "0123456789abcdef";
-        let str = "";
-        for (let i = 0; i < binarray.length * 4; i++) {
-            str += hex_tab.charAt((binarray[i >> 2] >> ((i % 4) * 8 + 4)) & 0xF) +
-                hex_tab.charAt((binarray[i >> 2] >> ((i % 4) * 8 )) & 0xF);
-        }
-        return str;
-    }
-
-    /*
-     * Convert an array of little-endian words to a base-64 string
-     */
-    binl2b64(binarray) {
-        let that = this;
-        let tab = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-        let str = "";
-        for (let i = 0; i < binarray.length * 4; i += 3) {
-            let triplet = (((binarray[i >> 2] >> 8 * ( i % 4)) & 0xFF) << 16)
-                | (((binarray[i + 1 >> 2] >> 8 * ((i + 1) % 4)) & 0xFF) << 8 )
-                | ((binarray[i + 2 >> 2] >> 8 * ((i + 2) % 4)) & 0xFF);
-            for (let j = 0; j < 4; j++) {
-                if (i * 8 + j * 6 > binarray.length * 32) str += b64pad;
-                else str += tab.charAt((triplet >> 6 * (3 - j)) & 0x3F);
-            }
-        }
-        return str;
-    }
-
 }
 
 export default MD5;

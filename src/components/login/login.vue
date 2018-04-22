@@ -128,10 +128,8 @@
              */
             loginEle: function () {
                 const that = this;
-//                that.$store.dispatch('loadingShow');
                 let password = that.password;
                 let username = that.userName;
-                console.log(password, username);
                 if (password && username) {
                     let reqData = {
                         password: password,
