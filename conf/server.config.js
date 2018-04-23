@@ -8,7 +8,7 @@ module.exports = {
     proxy: {
         '/v3/assistant': 'http://restapi.amap.com/v3/',
         // '/api/portal/login': 'http://192.168.0.101:10303/',
-        // '/api': 'http://192.168.13.114:10303',
-        '/api': 'http://10.176.156.95:10200',
+        '/api': 'http://192.168.0.101:10303',
+        // '/api': 'http://10.176.156.95:10200',
     },
 };

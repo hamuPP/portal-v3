@@ -1,0 +1,46 @@
+.panel-wrapper{
+  height: 100%;
+  overflow: hidden;
+  .panel-header{
+    height: 31px;
+    overflow: hidden;
+    background: #ADD8FB;
+    padding: 5px 7px;
+    .panel-left-icon{
+      display: block;
+      float: left;
+      overflow: hidden;
+      img{
+        width: 18px;
+        height: 20px;
+      }
+    }
+    .panel-title{
+      display: block;
+      float: left;
+      margin:0 0 0 3px;
+      font-size: 1rem;
+      color: #4F83B5;
+      height: 21px;
+      line-height: 21px;
+    }
+  }
+  .panel-body{
+    background: #fff;
+    color: #333;
+    font-size: .8rem;
+    height: -moz-calc(~"100% - 31px");
+    height: -webkit-calc(~"100% - 31px");
+    height: calc(~"100% - 31px")
+  }
+  .panel-footer{}
+}
+
+// 圆角、蓝边框的面板 --start--
+.panel-radius{
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #6CA8DC;
+}
+// 圆角、蓝边框的面板 --end--

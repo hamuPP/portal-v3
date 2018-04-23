@@ -1,102 +1,74 @@
 /*********************************************************************
 * 首页显示                                                           *
 * Created by tr on 2018/4/20.                                        *
+* Modified by ty on 2018/4/20.                                        *
 *********************************************************************/
+<style scoped lang="less">
+    @import '../../assets/css/index.less';
+</style>
 <template>
-    <div id="homePage" class="container-fluid homePage">
-        <div class="fixed-header">
-            <div class="logo"></div>
-            <a class="fixed-logo" @click="logoHref"></a>
+    <div class="homepage">
+        <!-- 头部 start -->
+        <div class="header-wrapper">
+            <Header></Header>
         </div>
+        <!-- 头部 end -->
 
-        <div class="fixed-right ccff">
-            <!--&lt;!&ndash;右边的模块&ndash;&gt;-->
-            <!--<RightModel></RightModel>-->
-            <!--&lt;!&ndash;地图模块&ndash;&gt;-->
-            <FunctionMap></FunctionMap>
-            <!--&lt;!&ndash;代办全屏模块&ndash;&gt;-->
-            <!--<AgencyFull></AgencyFull>-->
-
-            <router-view name="a"></router-view>
-            <!--<router-view name="b"></router-view>-->
-            <router-view name="c"></router-view>
+        <!-- 左侧一列 start -->
+        <div class="left-side">
+            <div class="inner-left-wrapper">
+                <basicPanel radius>
+                    <img src="../../assets/images/skin-blue/floder.png" alt="" slot="panelLeftIconImg">
+                    <p slot="panelTitleText">业务导航</p>
+                    <template slot='panelBody'>
+                        <BusinessPortal></BusinessPortal>
+                    </template>
+                </basicPanel>
+            </div>
         </div>
-        <div class="navbar-fixed-left">
-            <!--基本信息模块-->
-            <Business></Business>
-        </div>
+        <!-- 左侧一列 end -->
 
-        <!--提示信息模块-->
-        <PromptTpl></PromptTpl>
-        <!--加载中模块-->
-        <Loading></Loading>
-
-        <template v-if="showEditComponent">
-            <!--编辑组件模块-->
-            <editComponent ></editComponent>
-        </template>
-        <!--修改密码模块-->
-        <pwdTpl></pwdTpl>
+        <div class="right-side"></div>
     </div>
 </template>
 <script>
-    import Business from '../basic/BusinessPortal.vue'
-    import Loading from '../common/LoadingTpl.vue'
     //    import RightModel from '../basic/RightModel.vue'
-    import FunctionMap from '../basic/FunctionalMap.vue'
-    import Agency from '../agency/Agency.vue'
-    //    import AgencyFull from '../agency/AgencyFull.vue'
-
-    import PromptTpl from '../common/PromptTpl.vue'
-    import editComponent from '../assembly/EditComponent.vue'
-    import pwdTpl from '../basic/PasswordTpl.vue'
-    import commonMethods from '../../vuex/modules/commonMethods'
+    // import FunctionMap from '../basic/FunctionalMap.vue'
+    // import Agency from '../agency/Agency.vue'
+    // //    import AgencyFull from '../agency/AgencyFull.vue'
+    //
+    // import PromptTpl from '../common/PromptTpl.vue'
+    // import editComponent from '../assembly/EditComponent.vue'
+    // import pwdTpl from '../basic/PasswordTpl.vue'
+    // import commonMethods from '../../vuex/modules/commonMethods'
+    import Header from '../tpl/header.vue'
+    import BusinessPortal from '../tpl/businessPortal.vue'
+    import basicPanel from '../tpl/basicPanel.vue'
 
     import {mapGetters} from 'vuex'
-    export default{
-        name: 'HomePage.vue',
+
+    export default {
         computed: mapGetters({
             /* 是否弹出编辑组件弹框 */
             showEditComponent: 'showEditComponent'
         }),
         components: {
-            Loading,
-            Business,
-            FunctionMap,
-//            RightModel,
-//            AgencyFull,
-            PromptTpl,
-            editComponent,
-            pwdTpl
+            Header,
+            basicPanel,
+            BusinessPortal
+//             Loading,
+//             Business,
+//             FunctionMap,
+// //            RightModel,
+// //            AgencyFull,
+//             PromptTpl,
+//             editComponent,
+//             pwdTpl
         },
-        methods: {
-            logoHref() {
-                this.$router.push({path: '/index'});
-            },
-
-            getUserData() {
-                let reqData = {};
-                /* 获取用户信息 */
-//                debugger;
-                this.$store.dispatch('getUserData', { reqData });
-            }
-        },
+        methods: {},
         mounted() {
-            let that = this;
-            that.$nextTick(() => {
-                /* 隐藏地图 */
-                this.$store.dispatch('mapHide');
-            });
         },
         created() {
-            let that = this;
-            const CM = new commonMethods();
-            CM.clearConsole();
-            /* 获取用户信息 --by ty 2018年03月08日11:49:49 */
-            that.getUserData();
-            setTimeout(() => {
-                CM.clearConsole();
-            }, 1500);
         }
     }
 </script>
