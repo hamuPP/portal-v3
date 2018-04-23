@@ -13,7 +13,7 @@ class MD5 {
 
     hexMd5(s) {
         let that = this;
-        return that.binl2hex(that.coreMd5(that.that.str2binl(s), s.length * that.chrsz));
+        return that.binl2hex(that.coreMd5(that.str2binl(s), s.length * that.chrsz));
     }
 
     b64Md5(s) {
@@ -135,7 +135,7 @@ class MD5 {
             c = that.safeAdd(c, oldc);
             d = that.safeAdd(d, oldd);
         }
-        return Array(a, b, c, d);
+        return [a, b, c, d];
     }
 
     md5Cmn(q, a, b, x, s, t) {
@@ -171,7 +171,8 @@ class MD5 {
         let bkey = that.str2binl(key);
         let chrsz = that.chrsz;
         if (bkey.length > 16) bkey = that.coreMd5(bkey, key.length * chrsz);
-        let ipad = Array(16), opad = Array(16);
+        let ipad = Array(16);
+        let opad = Array(16);
         for (let i = 0; i < 16; i++) {
             ipad[i] = bkey[i] ^ 0x36363636;
             opad[i] = bkey[i] ^ 0x5C5C5C5C;
@@ -207,8 +208,9 @@ class MD5 {
         let that = this;
         let bin = [];
         let mask = (1 << that.chrsz) - 1;
-        for (let i = 0; i < str.length * that.chrsz; i += that.chrsz)
+        for (let i = 0; i < str.length * that.chrsz; i += that.chrsz) {
             bin[i >> 5] |= (str.charCodeAt(i / that.chrsz) & mask) << (i % 32);
+        }
         return bin;
     }
 
@@ -218,10 +220,11 @@ class MD5 {
     binl2str(bin) {
         let that = this;
         let chrsz = that.chrsz;
-        let str = "";
+        let str = '';
         let mask = (1 << chrsz) - 1;
-        for (let i = 0; i < bin.length * 32; i += chrsz)
+        for (let i = 0; i < bin.length * 32; i += chrsz) {
             str += String.fromCharCode((bin[i >> 5] >>> (i % 32)) & mask);
+        }
         return str;
     }
 
@@ -230,11 +233,11 @@ class MD5 {
      */
     binl2hex(binarray) {
         let that = this;
-        let hex_tab = that.hexcase ? "0123456789ABCDEF" : "0123456789abcdef";
-        let str = "";
+        let hexTab = that.hexcase ? '0123456789ABCDEF' : '0123456789abcdef';
+        let str = '';
         for (let i = 0; i < binarray.length * 4; i++) {
-            str += hex_tab.charAt((binarray[i >> 2] >> ((i % 4) * 8 + 4)) & 0xF) +
-                hex_tab.charAt((binarray[i >> 2] >> ((i % 4) * 8 )) & 0xF);
+            str += that.hexTab.charAt((binarray[i >> 2] >> ((i % 4) * 8 + 4)) & 0xF) +
+                that.hexTab.charAt((binarray[i >> 2] >> ((i % 4) * 8)) & 0xF);
         }
         return str;
     }
@@ -244,20 +247,19 @@ class MD5 {
      */
     binl2b64(binarray) {
         let that = this;
-        let tab = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-        let str = "";
+        let tab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+        let str = '';
         for (let i = 0; i < binarray.length * 4; i += 3) {
-            let triplet = (((binarray[i >> 2] >> 8 * ( i % 4)) & 0xFF) << 16)
-                | (((binarray[i + 1 >> 2] >> 8 * ((i + 1) % 4)) & 0xFF) << 8 )
-                | ((binarray[i + 2 >> 2] >> 8 * ((i + 2) % 4)) & 0xFF);
+            let triplet = (((binarray[i >> 2] >> 8 * (i % 4)) & 0xFF) << 16) |
+                (((binarray[i + 1 >> 2] >> 8 * ((i + 1) % 4)) & 0xFF) << 8) |
+                ((binarray[i + 2 >> 2] >> 8 * ((i + 2) % 4)) & 0xFF);
             for (let j = 0; j < 4; j++) {
-                if (i * 8 + j * 6 > binarray.length * 32) str += b64pad;
+                if (i * 8 + j * 6 > binarray.length * 32) str += that.b64pad;
                 else str += tab.charAt((triplet >> 6 * (3 - j)) & 0x3F);
             }
         }
         return str;
     }
-
 }
 
 export default MD5;
