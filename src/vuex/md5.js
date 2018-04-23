@@ -236,8 +236,8 @@ class MD5 {
         let hexTab = that.hexcase ? '0123456789ABCDEF' : '0123456789abcdef';
         let str = '';
         for (let i = 0; i < binarray.length * 4; i++) {
-            str += that.hexTab.charAt((binarray[i >> 2] >> ((i % 4) * 8 + 4)) & 0xF) +
-                that.hexTab.charAt((binarray[i >> 2] >> ((i % 4) * 8)) & 0xF);
+            str += hexTab.charAt((binarray[i >> 2] >> ((i % 4) * 8 + 4)) & 0xF) +
+                hexTab.charAt((binarray[i >> 2] >> ((i % 4) * 8)) & 0xF);
         }
         return str;
     }

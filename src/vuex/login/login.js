@@ -46,7 +46,8 @@ const actions = {
         let _md5 = new Md5();
         console.log(reqData.password);
         let md5PWD = _md5.hexMd5(reqData.password); // 加密
-        let passwordMd5Upper = md5PWD.toUpperCase();
+        let passwordMd5Upper = md5PWD.toUpperCase();// 12345的是E10ADC3949BA59ABBE56E057F20F883E
+
         console.log(md5PWD);
         axios({
             method: 'post',
@@ -55,7 +56,7 @@ const actions = {
             headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
             data: {
                 username: reqData.username,
-                password: 'E10ADC3949BA59ABBE56E057F20F883E'
+                password: passwordMd5Upper
             },
             transformRequest: [function (data) {
                 let ret = ''

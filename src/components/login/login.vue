@@ -98,13 +98,14 @@
             loginData(val) {
                 let that = this;
                 console.log(val);// data.meta.code
-                if (val && val.meta && val.meta.code === 1) {
-                    if (val.meta.code === 1) {
-                        that.$router.push({path: '/mock'});
+                let data = val.data;
+                if (data && data.meta && data.meta.code === 1) {
+                    if (data.meta.code === 1) {
+                        that.$router.push({path: '/index'});
                         that.isShow = true;
-                        that.loginDataValue = val.msg;
+                        that.loginDataValue = data.msg;
                     } else {
-                        that.loginDataValue = val.meta.message || '网络错误';
+                        that.loginDataValue = data.meta.message || '网络错误';
                     }
                 } else {
                     that.loginDataValue = '网络错误';
@@ -114,7 +115,7 @@
                 // that.loginDataValue = val.msg;
                 // that.isShow = true;
                  /* 2s后信息自动隐藏 */
-                 if (val) {
+                 if (data) {
                      setTimeout(function() {
                          that.loginDataValue = '';
                          that.isShow = false;
