@@ -1,4 +1,4 @@
-# 我的个站-tarot 的前端项目
+# 门户
 
 ## 采用技术
 > koa2+vue2+vuex+webpack
@@ -12,7 +12,9 @@
 ├── src/      (开发用的目录 )
 ├		├── assets/  (静态资源)
 ├		├── components/  (功能模块/业务模块)
-├		├		└── Index.vue (入口vue文件)
+├		├		└── /index (首页vue组件的文件夹)
+├		├		└── /login (登录vue组件)
+├		├		└── /tpl (基础vue组件和公共vue组件的文件夹)
 ├		├── vuex/ (vuex目录： 放 数据管理状态管理的相关逻辑)
 ├		└── main.js/ (路由的配置)
 ├── dist/      (打包后的文件，用于生产环境的打包后的目录，也可以通过nginx代理到dist上运行)

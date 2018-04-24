@@ -28,7 +28,12 @@
         </div>
         <!-- 左侧一列 end -->
 
-        <div class="right-side"></div>
+        <!-- 右侧一列 start -->
+        <div class="right-side">
+            <router-view name="main"></router-view>
+        </div>
+        <!-- 右侧一列 end -->
+
     </div>
 </template>
 <script>

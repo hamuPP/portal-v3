@@ -1,5 +1,5 @@
 <style scoped lang="less">
-    @import '../assets/css/header.less';
+    @import '../../assets/css/header.less';
 </style>
 <template>
     <Col :xs="24">
