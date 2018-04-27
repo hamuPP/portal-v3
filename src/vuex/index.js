@@ -7,6 +7,7 @@ import Vuex from 'vuex'
 /* 首页 Vuex对象 */
 import homePage from './homepage/homepage'
 import loginJs from './login/login'
+import mockLoginJs from './login/mockLogin'
 
 /* Vue加载状态管理器实例 */
 Vue.use(Vuex);
@@ -14,7 +15,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     modules: {
         homePage,
-        loginJs
+        loginJs,
+        mockLoginJs
     },
     strict: false
 });
