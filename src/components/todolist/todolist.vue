@@ -21,7 +21,7 @@
         name: 'todolist',
         data () {
             return {
-                tableBodyHeight: 300,
+                tableBodyHeight: 278,
                 label: (h) => {
                     return h('div', [
                         h('span', '标签一'),
@@ -95,6 +95,15 @@
             }
         },
 
-        created() {}
+        created() {
+            // 获得标签头的数据
+//            let reqData = {
+//                password: password,
+//                username: username
+//            };
+//            this.$store.dispatch('login', {reqData});
+            debugger;
+            console.log('todolist created,');
+        }
     }
 </script>

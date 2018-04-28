@@ -55,7 +55,7 @@
                     </button>
                 </template>
 
-                <button type="button" @click="toMockPage">to mock page</button>
+                <!--<button type="button" @click="toMockPage">to mock page</button>-->
             </form>
         </div>
         <!--<div class='footer'>-->
@@ -108,7 +108,13 @@
                         that.loginDataValue = data.meta.message || '网络错误';
                     }
                 } else {
-                    that.loginDataValue = '网络错误';
+                    let msgText = data.meta.message || '网络错误';
+
+                    // ‘坏的凭证’‘Bad credentials'
+                    if (data.meta.message === '坏的凭证' || data.meta.message === 'Bad credentials') {
+                        msgText = '密码错误'
+                    }
+                    that.loginDataValue = msgText;
                 }
                 // const that = this;
                 //

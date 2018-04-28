@@ -10,13 +10,11 @@ const state = {
     /* 登录后的信息 */
     loginData: {},
     /* 退出后的信息 */
-    logoutData: {id: 1, data: ''},
-    loginAccount: ''
+    // logoutData: {id: 1, data: ''},
 };
 const getters = {
     loginData: state => state.loginData,
-    logoutData: state => state.logoutData,
-    loginAccount: state => state.loginAccount,
+    // logoutData: state => state.logoutData,
 };
 const actions = {
     /**
@@ -67,23 +65,20 @@ const actions = {
             }],
         }).then(res => {
             console.log(res)
-            debugger;
             commit(common.LOGIN_DATA, {data: res});
         }).catch(e => {
             console.log(e)
-            debugger;
             commit(common.LOGIN_DATA, {data: e});
         });
     }
 };
 const mutations = {
     [common.LOGIN_DATA](state, {data}) {
-        debugger;
         state.loginData = data;
     },
     [common.LOGOUT_DATA](state, { newData }) {
-        state.logoutData.id++;
-        state.logoutData.data = newData;
+        // state.logoutData.id++;
+        // state.logoutData.data = newData;
     }
 };
 export default {
