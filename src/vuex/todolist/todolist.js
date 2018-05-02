@@ -6,9 +6,11 @@ import axios from 'axios'
 
 const state = {
     backlogsData: {},
+    backlogsTagData: {}
 };
 const getters = {
     backlogsData: state => state.backlogsData,
+    backlogsTagData: state => state.backlogsTagData,
 };
 const actions = {
     getBacklogsData({commit}, {reqData}) {
@@ -45,7 +47,7 @@ const actions = {
             }
         );
         let url3 = 'api/portal/backlogsData'; // todo 假地址
-        console.log('getBacklogsData in todolist.js', url);
+        console.log('getBacklogsTagData in todolist.js', url);
         console.log(reqData.parameter);
         axios({
             method: 'get',
@@ -53,15 +55,18 @@ const actions = {
             data: reqData.parameter,
             params: reqData.parameter
         }).then(res => {
-            commit(common.BACKLOGS_DATA, {data: res});
+            commit(common.BACKLOGS_TAG_DATA, {data: res});
         }).catch(e => {
-            commit(common.BACKLOGS_DATA, {data: e});
+            commit(common.BACKLOGS_TAG_DATA, {data: e});
         });
     }
 };
 const mutations = {
     [common.BACKLOGS_DATA](state, {data}) {
         state.backlogsData = data;
+    },
+    [common.BACKLOGS_TAG_DATA](state, {data}) {
+        state.backlogsTagData = data;
     }
 };
 export default {

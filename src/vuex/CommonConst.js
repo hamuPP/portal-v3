@@ -8,6 +8,7 @@ export const LOGIN_DATA = 'LOGIN_DATA';
 export const LOGOUT_DATA = 'LOGOUT_DATA';
 export const USER_DATA = 'USER_DATA';
 export const BACKLOGS_DATA = 'BACKLOGS_DATA';
+export const BACKLOGS_TAG_DATA = 'BACKLOGS_TAG_DATA';
 // 变量 end
 
 // 请求地址 --start--
