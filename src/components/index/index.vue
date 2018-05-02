@@ -22,6 +22,10 @@
                     <p slot="panelTitleText">业务导航</p>
                     <template slot='panelBody'>
                         <BusinessPortal></BusinessPortal>
+                        <div class="bottom-buttons-group">
+                            <button type="button" class="btn">功能地图</button>
+                            <button type="button" class="btn">组件定制</button>
+                        </div>
                     </template>
                 </basicPanel>
             </div>

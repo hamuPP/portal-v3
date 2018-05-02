@@ -1,6 +1,7 @@
 import Login from '../components/login/login.vue'
 import Index from '../components/index/index.vue'
 import rightAll from '../components/index/rightAll.vue'
+import functionMapRightAll from '../components/functionMap/functionMapRightAll.vue'
 import mock from '../components/mock.vue'
 
 const routes = [
@@ -22,6 +23,15 @@ const routes = [
                 path: '',
                 components: {
                     main: rightAll
+                    // a:RightModel,
+                    // // b:FunctionMap,
+                    // c:AgencyFull
+                }
+            },
+            {
+                path: '/functionMap',
+                components: {
+                    main: functionMapRightAll
                     // a:RightModel,
                     // // b:FunctionMap,
                     // c:AgencyFull
