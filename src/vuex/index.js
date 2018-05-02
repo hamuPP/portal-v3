@@ -7,6 +7,7 @@ import Vuex from 'vuex'
 /* 首页 Vuex对象 */
 import homePage from './homepage/homepage'
 import loginJs from './login/login'
+import todolistJs from './todolist/todolist'
 import mockLoginJs from './login/mockLogin'
 
 /* Vue加载状态管理器实例 */
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     modules: {
         homePage,
         loginJs,
+        todolistJs,
         mockLoginJs
     },
     strict: false

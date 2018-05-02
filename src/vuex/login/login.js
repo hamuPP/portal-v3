@@ -9,11 +9,13 @@ import Md5 from '../md5'
 const state = {
     /* 登录后的信息 */
     loginData: {},
+    userData: {},
     /* 退出后的信息 */
     // logoutData: {id: 1, data: ''},
 };
 const getters = {
     loginData: state => state.loginData,
+    userData: state => state.userData,
     // logoutData: state => state.logoutData,
 };
 const actions = {
@@ -42,11 +44,8 @@ const actions = {
 
     login({commit}, {reqData}) {
         let _md5 = new Md5();
-        console.log(reqData.password);
         let md5PWD = _md5.hexMd5(reqData.password); // 加密
         let passwordMd5Upper = md5PWD.toUpperCase();// 12345的是E10ADC3949BA59ABBE56E057F20F883E
-
-        console.log(md5PWD);
         axios({
             method: 'post',
             url: common.getUrl({url: common.LOGIN}),
@@ -64,17 +63,44 @@ const actions = {
                 return ret
             }],
         }).then(res => {
-            console.log(res)
             commit(common.LOGIN_DATA, {data: res});
         }).catch(e => {
-            console.log(e)
             commit(common.LOGIN_DATA, {data: e});
+        });
+    },
+
+    /**
+     * 获取用户信息
+     * @param commit
+     * @param reqData
+     */
+    getUserData({commit}, {reqData}) {
+        let url = common.getUrl(
+            {
+                url: common.GET_USER_DATA,
+                queryParams: {
+                    account: reqData.account
+                }
+            }
+        );
+        let url3 = 'api/portal/treeMe'; // todo 假地址
+        console.log('getUserData in login.js', url);
+        axios({
+            method: 'get',
+            url: url,
+        }).then(res => {
+            commit(common.USER_DATA, {data: res});
+        }).catch(e => {
+            commit(common.USER_DATA, {data: e});
         });
     }
 };
 const mutations = {
     [common.LOGIN_DATA](state, {data}) {
         state.loginData = data;
+    },
+    [common.USER_DATA](state, {data}) {
+        state.userData = data;
     },
     [common.LOGOUT_DATA](state, { newData }) {
         // state.logoutData.id++;

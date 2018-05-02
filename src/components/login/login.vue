@@ -88,7 +88,8 @@
         },
         computed: mapGetters({
             /* 登录后的数据 */
-            loginData: 'loginData'
+            loginData: 'loginData',
+            userData: 'userData'
         }),
         watch: {
             /**
@@ -97,13 +98,17 @@
              */
             loginData(val) {
                 let that = this;
-                console.log(val);// data.meta.code
                 let data = val.data;
-                if (data && data.meta && data.meta.code === 1) {
+                if (data && data.meta) {
                     if (data.meta.code === 1) {
-                        that.$router.push({path: '/index'});
                         that.isShow = true;
                         that.loginDataValue = data.msg;
+
+                        // 请求用户数据，
+                        let reqData = {
+                            account: that.userName
+                        };
+                        that.$store.dispatch('getUserData', {reqData});
                     } else {
                         that.loginDataValue = data.meta.message || '网络错误';
                     }
@@ -127,6 +132,22 @@
                          that.isShow = false;
                      }, 2000);
                  }
+            },
+
+            userData(val) {
+                debugger;
+                let that = this;
+                let data = val.data;
+                if (data && data.meta) {
+                    if (data.meta.code === 1) {
+                        sessionStorage.setItem('account', that.userName);
+                        that.$router.push({path: '/index'});
+                    } else {
+                        that.loginDataValue = data.meta.message || '网络错误';
+                    }
+                } else {
+
+                }
             }
         },
         methods: {
