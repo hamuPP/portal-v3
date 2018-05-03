@@ -9,6 +9,7 @@ import homePage from './homepage/homepage'
 import loginJs from './login/login'
 import todolistJs from './todolist/todolist'
 import calenderScheduleJs from './calendarSchedule/calenderSchedule'
+import editMaskJs from './tpl/editMask'
 import mockLoginJs from './login/mockLogin'
 
 /* Vue加载状态管理器实例 */
@@ -20,6 +21,7 @@ export default new Vuex.Store({
         loginJs,
         todolistJs,
         calenderScheduleJs,
+        editMaskJs,
         mockLoginJs
     },
     strict: false

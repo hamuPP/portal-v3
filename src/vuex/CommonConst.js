@@ -14,6 +14,9 @@ export const SCHEDULE_ADD_DATE = 'SCHEDULE_ADD_DATE';
 export const SCHEDULE_UPDATE_DATE = 'SCHEDULE_UPDATE_DATE';
 export const SCHEDULE_DELETE_DATE = 'SCHEDULE_DELETE_DATE';
 export const SCHEDULE_ALL_DATE = 'SCHEDULE_ALL_DATE';
+export const GET_ID_COMPONENT = 'GET_ID_COMPONENT';
+export const GET_ID_EDIT_DATA = 'GET_ID_EDIT_DATA';
+export const GET_ID_LIST_DATA = 'GET_ID_LIST_DATA';
 // 变量 end
 
 // 请求地址 --start--
@@ -37,6 +40,13 @@ export const FIND_BY = GATEWAY_SCHEDULE + 'schedule/date/${date}';
 export const SCHEDULE_ADD = `${GATEWAY_SCHEDULE}schedule`;
 // 日程表删除 请求方式“delete”
 export const SCHEDULE_DELETE = GATEWAY_SCHEDULE + 'schedule/${id}';
+/**
+ * 查询单个组件 请求方法为“get”
+ * 删除组件 请求方式为“delete”
+ * 更新组件 请求方式为“put”
+ * @type {string}
+ */
+export const IDCOMPONENT = GATEWAY_PORTAL + 'resource/${userId}/${id}/component';
 // 请求地址 --end--
 
 export const getUrl = function(urlObj) {
