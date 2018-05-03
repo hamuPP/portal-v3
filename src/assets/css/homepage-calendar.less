@@ -1,4 +1,696 @@
+/*********************************************************************
+ * Created by tr on 2017/12/26.                                       *
+ *********************************************************************/
+@import 'common-tr';
+
+.homepage-calendar-container {
+    float: left;
+    width: 100%;
+    overflow: hidden;
+    /* margin: 10px 0 0 .2%; */
+}
+
+.homepage-calendar-container>.left {
+    position: relative;
+    height: 370px;
+}
+
+.homepage-calendar-container>.right {
+    position: relative;
+    margin-top: 10px;
+    height: 370px;
+}
+
+.homepage-calendar-container .left-content,
+.homepage-calendar-container .right-content {
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    background: #fff;
+}
+
+.homepage-calendar-container .content-title {
+    height: 51px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.homepage-calendar-container .content-title .title {
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    line-height: 50px;
+    float: left;
+    color: #407DD1;
+}
+
+.homepage-calendar-container .content-title .toolbar-right {
+    float: right;
+    width: 24px;
+    height: 24px;
+    margin-top: 15px;
+    background: #eee;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.homepage-calendar-container .addressbook-right-icon {
+    font-size: 12px;
+    color: #555;
+    cursor: pointer;
+}
+
+.calendar-notice-wrapper {
+    .left-content {
+        .content-body {
+            .pt(20px);
+            .calendar-date {
+                float: left;
+                width: -moz-calc(~"60% -10px");
+                width: -webkit-calc(~"60%-10px");
+                width: calc(~"60% - 10px");
+                .mr(20px);
+            }
+            .calendar-content {
+                display: inline-block;
+                width: -moz-calc(~"40% -12px");
+                width: -webkit-calc(~"40%-12px");
+                width: calc(~"40% - 12px");
+                text-align: left;
+                .iconfont {
+                    display: inline-block;
+                    height: 32px;
+                    width: 24px;
+                    overflow: hidden;
+                    font-size: 24px;
+                }
+                .addTask {
+                    border-bottom: 1px solid @border-table;
+                    .pb(10px);
+                    cursor: pointer;
+                }
+                .task-title {
+                    display: inline-block;
+                    width: -moz-calc(~"100% -30px");
+                    width: -webkit-calc(~"100%-30px");
+                    width: calc(~"100% - 30px");
+                    > p {
+                        width: 100%;
+                        .margin();
+                        text-align: left;
+                        .text-overflow-ellipsis;
+                        &:first-child {
+                            color: @active-blue;
+                            font-size: 14px;
+                            font-weight: bold;
+                        }
+                        &:last-child {
+                            .font-size10();
+                            color: @black-light;
+                            .ml(-10px);
+                        }
+                    }
+                }
+                .task-list {
+                    .padding();
+                    .margin();
+                    .mt(10px);
+                    width: 100%;
+                    height: 215px;
+                    overflow-y: auto;
+                    &.task-detail {
+                        position: relative;
+                        background: @white-deep;
+                        height: 220px;
+                        .mt(10px);
+                        > li {
+                            &:last-child {
+                                > p {
+                                    height: 130px;
+                                    overflow-y: auto;
+                                }
+                            }
+                            &.notStyle {
+                                .pl(15px);
+                                button {
+                                    position: absolute;
+                                    right: 0;
+                                    top: 140px;
+                                    width: -moz-calc(~"50%");
+                                    width: -webkit-calc(~"50%");
+                                    width: calc(~"50%");
+                                    height: 24px;
+                                    line-height: 24px;
+                                    color: @black;
+                                    background: @white-deep;
+                                    border: 0;
+                                    cursor: pointer;
+                                    &.addTask {
+                                        left: 0;
+                                        right: inherit;
+                                        color: @white;
+                                        background: @active-blue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    > li {
+                        position: relative;
+                        display: inline-block;
+                        width: 100%;
+                        height: 40px;
+                        .pl(15px);
+                        .mb(17px);
+                        cursor: pointer;
+                        &:before {
+                            position: absolute;
+                            left: 0;
+                            content: " ";
+                            width: 0;
+                            height: 40px;
+                            border-left: 4px solid @active-blue;
+                        }
+                        &.notStyle {
+                            .padding();
+                            .margin();
+                            &:before {
+                                border: 0;
+                            }
+                            &:hover {
+                                background: transparent;
+                            }
+                        }
+                        > p {
+                            .margin();
+                            .padding();
+                            width: -moz-calc(~"100% - 20px");
+                            width: -webkit-calc(~"100% - 20px");
+                            width: calc(~"100% - 20px");
+                            .text-overflow-ellipsis;
+                            font-size: 12px;
+                            color: @black;
+                            &:first-child {
+                                color: @black-light;
+                            }
+                        }
+                        &:hover {
+                            background: @white-deep;
+                            > .iconfont {
+                                display: inline-block;
+                            }
+                        }
+                        > .iconfont {
+                            display: none;
+                            position: absolute;
+                            right: 0;
+                            top: 12px;
+                            font-size: 16px;
+                            cursor: pointer;
+                        }
+                    }
+                }
+                &.task_add {
+                    > input,
+                    textarea {
+                        width: 100%;
+                        .mb(10px);
+                        .padding(10px, 8px, 10px, 8px);
+                        border: 1px solid @border-table;
+                    }
+                    > input {
+                        height: 32px;
+                        line-height: 32px;
+                    }
+                    > textarea {
+                        height: 120px;
+                        resize: none;
+                    }
+                    > div {
+                        .mb(10px);
+                    }
+                    > button {
+                        width: -moz-calc(~"50% - 6px");
+                        width: -webkit-calc(~"50% - 6px");
+                        width: calc(~"50% - 6px");
+                        height: 24px;
+                        line-height: 24px;
+                        color: @black;
+                        background: @white-deep;
+                        border: 1px solid @border-table;
+                        cursor: pointer;
+                        &.addTask {
+                            color: @white;
+                            background: @active-blue;
+                            .mr(6px);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .right-content {
+        > .content-title {
+            border: 0;
+        }
+        .toolbar-right {
+            &.noticeManage {
+                font-size: 12px;
+                width: 80px;
+                height: 24px;
+                line-height: 24px;
+                text-align: center;
+                .mr(10px);
+                background: @activeButton;
+                color: white;
+                border: 0;
+            }
+        }
+    }
+}
+.homepage-calendar-container {
+    .left-content {
+        .content-body {
+            .pt(20px);
+            .calendar-date {
+                float: left;
+                width: -moz-calc(~"60% -10px");
+                width: -webkit-calc(~"60%-10px");
+                width: calc(~"60% - 10px");
+                .mr(20px);
+            }
+            .calendar-content {
+                display: inline-block;
+                width: -moz-calc(~"40% -12px");
+                width: -webkit-calc(~"40%-12px");
+                width: calc(~"40% - 12px");
+                text-align: left;
+                border-left: 1px dotted #dcdcdc;
+                padding-left: 5px;
+                .iconfont {
+                    display: inline-block;
+                    height: 32px;
+                    width: 24px;
+                    overflow: hidden;
+                    font-size: 24px;
+                }
+                .addTask {
+                    border-bottom: 1px solid @border-table;
+                    .pb(10px);
+                    cursor: pointer;
+                }
+                .task-title {
+                    display: inline-block;
+                    width: -moz-calc(~"100% -30px");
+                    width: -webkit-calc(~"100%-30px");
+                    width: calc(~"100% - 30px");
+                    > p {
+                        width: 100%;
+                        .margin();
+                        text-align: left;
+                        .text-overflow-ellipsis;
+                        &:first-child {
+                            color: @active-blue;
+                            font-size: 14px;
+                            font-weight: bold;
+                        }
+                        &:last-child {
+                            .font-size10();
+                            color: @black-light;
+                            .ml(-10px);
+                        }
+                    }
+                }
+                .task-list {
+                    .padding();
+                    .margin();
+                    .mt(10px);
+                    width: 100%;
+                    height: 215px;
+                    overflow-y: auto;
+                    &.task-detail {
+                        position: relative;
+                        background: @white-deep;
+                        height: 220px;
+                        .mt(10px);
+                        > li {
+                            &:last-child {
+                                > p {
+                                    height: 130px;
+                                    overflow-y: auto;
+                                    word-wrap: break-word;
+                                    white-space: inherit;
+                                }
+                            }
+                            &.notStyle {
+                                .pl(15px);
+                                button {
+                                    position: absolute;
+                                    right: 0;
+                                    top: 140px;
+                                    width: -moz-calc(~"50%");
+                                    width: -webkit-calc(~"50%");
+                                    width: calc(~"50%");
+                                    height: 24px;
+                                    line-height: 24px;
+                                    color: @black;
+                                    background: @white-deep;
+                                    border: 0;
+                                    cursor: pointer;
+                                    &.addTask {
+                                        left: 0;
+                                        right: inherit;
+                                        color: @white;
+                                        background: @active-blue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    > li {
+                        position: relative;
+                        display: inline-block;
+                        width: 100%;
+                        height: 40px;
+                        .pl(15px);
+                        .mb(17px);
+                        cursor: pointer;
+                        &:before {
+                            position: absolute;
+                            left: 0;
+                            content: " ";
+                            width: 0;
+                            height: 40px;
+                            border-left: 4px solid @active-blue;
+                        }
+                        &.notStyle {
+                            .padding();
+                            .margin();
+                            &:before {
+                                border: 0;
+                            }
+                            &:hover {
+                                background: transparent;
+                            }
+                        }
+                        > p {
+                            .margin();
+                            .padding();
+                            width: -moz-calc(~"100% - 20px");
+                            width: -webkit-calc(~"100% - 20px");
+                            width: calc(~"100% - 20px");
+                            .text-overflow-ellipsis;
+                            font-size: 12px;
+                            color: @black;
+                            &:first-child {
+                                color: @black-light;
+                            }
+                        }
+                        &:hover {
+                            background: @white-deep;
+                            > .iconfont {
+                                display: inline-block;
+                            }
+                        }
+                        > .iconfont {
+                            display: none;
+                            position: absolute;
+                            right: 0;
+                            top: 12px;
+                            font-size: 16px;
+                            cursor: pointer;
+                        }
+                    }
+                }
+                &.task_add {
+                    > input,
+                    textarea {
+                        width: 100%;
+                        .mb(10px);
+                        .padding(10px, 8px, 10px, 8px);
+                        border: 1px solid @border-table;
+                    }
+                    > input {
+                        height: 32px;
+                        line-height: 32px;
+                    }
+                    > textarea {
+                        height: 120px;
+                        resize: none;
+                    }
+                    > div {
+                        .mb(10px);
+                    }
+                    > button {
+                        width: -moz-calc(~"50% - 6px");
+                        width: -webkit-calc(~"50% - 6px");
+                        width: calc(~"50% - 6px");
+                        height: 24px;
+                        line-height: 24px;
+                        color: @black;
+                        background: @white-deep;
+                        border: 1px solid @border-table;
+                        cursor: pointer;
+                        &.addTask {
+                            color: @white;
+                            background: @active-blue;
+                            .mr(6px);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .right-content {
+        > .content-title {
+            border: 0;
+        }
+        .toolbar-right {
+            &.noticeManage {
+                font-size: 12px;
+                width: 80px;
+                height: 24px;
+                line-height: 24px;
+                text-align: center;
+                .mr(10px);
+                background: @activeButton;
+                color: white;
+                border: 0;
+            }
+        }
+    }
+}
+
 .homepage-calendar-container{
   height: 330px;
-  background: mediumpurple;
+  //background: mediumpurple;
+    .left-content {
+        .content-body {
+            .pt(20px);
+            .calendar-date {
+                float: left;
+                width: -moz-calc(~"60% -10px");
+                width: -webkit-calc(~"60%-10px");
+                width: calc(~"60% - 10px");
+                .mr(20px);
+            }
+            .calendar-content {
+                display: inline-block;
+                width: -moz-calc(~"40% -12px");
+                width: -webkit-calc(~"40%-12px");
+                width: calc(~"40% - 12px");
+                text-align: left;
+                border-left: 1px dotted #dcdcdc;
+                padding-left: 5px;
+                .iconfont {
+                    display: inline-block;
+                    height: 32px;
+                    width: 24px;
+                    overflow: hidden;
+                    font-size: 24px;
+                }
+                .addTask {
+                    border-bottom: 1px solid @border-table;
+                    .pb(10px);
+                    cursor: pointer;
+                }
+                .task-title {
+                    display: inline-block;
+                    width: -moz-calc(~"100% -30px");
+                    width: -webkit-calc(~"100%-30px");
+                    width: calc(~"100% - 30px");
+                    > p {
+                        width: 100%;
+                        .margin();
+                        text-align: left;
+                        .text-overflow-ellipsis;
+                        &:first-child {
+                            color: @active-blue;
+                            font-size: 14px;
+                            font-weight: bold;
+                        }
+                        &:last-child {
+                            .font-size10();
+                            color: @black-light;
+                            .ml(-10px);
+                        }
+                    }
+                }
+                .task-list {
+                    .padding();
+                    .margin();
+                    .mt(10px);
+                    width: 100%;
+                    height: 215px;
+                    overflow-y: auto;
+                    &.task-detail {
+                        position: relative;
+                        background: @white-deep;
+                        height: 220px;
+                        .mt(10px);
+                        > li {
+                            &:last-child {
+                                > p {
+                                    height: 130px;
+                                    overflow-y: auto;
+                                    word-wrap: break-word;
+                                    white-space: inherit;
+                                }
+                            }
+                            &.notStyle {
+                                .pl(15px);
+                                button {
+                                    position: absolute;
+                                    right: 0;
+                                    top: 140px;
+                                    width: -moz-calc(~"50%");
+                                    width: -webkit-calc(~"50%");
+                                    width: calc(~"50%");
+                                    height: 24px;
+                                    line-height: 24px;
+                                    color: @black;
+                                    background: @white-deep;
+                                    border: 0;
+                                    cursor: pointer;
+                                    &.addTask {
+                                        left: 0;
+                                        right: inherit;
+                                        color: @white;
+                                        background: @active-blue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    > li {
+                        position: relative;
+                        display: inline-block;
+                        width: 100%;
+                        height: 40px;
+                        .pl(15px);
+                        .mb(17px);
+                        cursor: pointer;
+                        &:before {
+                            position: absolute;
+                            left: 0;
+                            content: " ";
+                            width: 0;
+                            height: 40px;
+                            border-left: 4px solid @active-blue;
+                        }
+                        &.notStyle {
+                            .padding();
+                            .margin();
+                            &:before {
+                                border: 0;
+                            }
+                            &:hover {
+                                background: transparent;
+                            }
+                        }
+                        > p {
+                            .margin();
+                            .padding();
+                            width: -moz-calc(~"100% - 20px");
+                            width: -webkit-calc(~"100% - 20px");
+                            width: calc(~"100% - 20px");
+                            .text-overflow-ellipsis;
+                            font-size: 12px;
+                            color: @black;
+                            &:first-child {
+                                color: @black-light;
+                            }
+                        }
+                        &:hover {
+                            background: @white-deep;
+                            > .iconfont {
+                                display: inline-block;
+                            }
+                        }
+                        > .iconfont {
+                            display: none;
+                            position: absolute;
+                            right: 0;
+                            top: 12px;
+                            font-size: 16px;
+                            cursor: pointer;
+                        }
+                    }
+                }
+                &.task_add {
+                    > input,
+                    textarea {
+                        width: 100%;
+                        .mb(10px);
+                        .padding(10px, 8px, 10px, 8px);
+                        border: 1px solid @border-table;
+                    }
+                    > input {
+                        height: 32px;
+                        line-height: 32px;
+                    }
+                    > textarea {
+                        height: 120px;
+                        resize: none;
+                    }
+                    > div {
+                        .mb(10px);
+                    }
+                    > button {
+                        width: -moz-calc(~"50% - 6px");
+                        width: -webkit-calc(~"50% - 6px");
+                        width: calc(~"50% - 6px");
+                        height: 24px;
+                        line-height: 24px;
+                        color: @black;
+                        background: @white-deep;
+                        border: 1px solid @border-table;
+                        cursor: pointer;
+                        &.addTask {
+                            color: @white;
+                            background: @active-blue;
+                            .mr(6px);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .right-content {
+        > .content-title {
+            border: 0;
+        }
+        .toolbar-right {
+            &.noticeManage {
+                font-size: 12px;
+                width: 80px;
+                height: 24px;
+                line-height: 24px;
+                text-align: center;
+                .mr(10px);
+                background: @activeButton;
+                color: white;
+                border: 0;
+            }
+        }
+    }
 }

@@ -16,7 +16,7 @@
         </div>
         <div class="homepage-right-cols cols-1">
             <basicPanel radius>
-                <img src="../../assets/images/skin-blue/notepad.png" alt="" slot="panelLeftIconImg">
+                <img src="../../assets/images/skin-blue/calendar.png" alt="" slot="panelLeftIconImg">
                 <p slot="panelTitleText">日程表</p>
                 <template slot='panelBody'>
                     <Calendar></Calendar>

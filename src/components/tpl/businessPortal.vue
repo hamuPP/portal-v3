@@ -21,6 +21,8 @@
 <script>
     import json from '../../mockData/businessPortalMaplistData.json';
     import draggable from 'vuedraggable';
+    import {mapGetters} from 'vuex'
+
     export default {
         props: {
             radius: {
@@ -36,18 +38,42 @@
         components: {
             draggable
         },
-        computed: {
-            computedPanelCls() {
-                let that = this;
-                let result = that.radius ? 'panel-radius' : '';
-                return result;
-            }
-        },
+        computed: mapGetters({
+            /* 用户数据数据 */
+            userData: 'userData'
+        }),
         watch: {
+        },
+        methods: {
+            getFunctionMapData () {
+                let that = this;
+//                let reqData = {
+//                    url: 'FUNC',
+//                    data: {
+//                        userId: me.userData.account
+//                    }
+//                };
+//                that.$store.dispatch('getFuncData', {reqData});
+
+//                let newData = {
+//                    func: this.functionMapData,
+//                    data: data
+//                };
+//                that.$store.dispatch('manageDataFunc', {newData});
+            }
         },
         created() {
             let that = this;
             that.mapListData = json.data;
+            let userDataFromBackEnd = this.userData.data;
+            if (userDataFromBackEnd && userDataFromBackEnd.data && userDataFromBackEnd.data.account) {
+                this.account = userDataFromBackEnd.data.account;
+            } else { // 页面刷新了。重新获取一次userData todo
+                this.account = sessionStorage.getItem('account');
+            }
+
+            // 获取业务导航中的数据
+            this.getFunctionMapData();
         }
     }
 </script>

@@ -11,10 +11,14 @@
             <img class="header-logo" src="../../assets/images/daduheLogo.png" alt="logo">
         </div>
         <div class="right-toolbar">
-            <span class="right-toolbar-item">功能面板</span>
-            <span class="right-toolbar-item">小公举</span>
-            <span class="right-toolbar-item">退出</span>
-            <span class="right-toolbar-item">我</span>
+            <span class="right-toolbar-item">
+                <img src="../../assets/images/skin-blue/gongjuxiang.png" alt="gongjuxiang">工具集</span>
+            <span class="right-toolbar-item">
+                <img style="height: 20px;" src="../../assets/images/skin-blue/maillist.png" alt="tongxunlu">通讯录</span>
+            <span class="right-toolbar-item">
+                <img src="../../assets/images/skin-blue/tuichu.png" alt="tuichu">退出</span>
+            <span class="right-toolbar-item">
+                <img src="../../assets/images/skin-blue/chengyuan.png" alt="wo">我</span>
         </div>
     </div>
 </template>

@@ -21,8 +21,13 @@
                     <img src="../../assets/images/skin-blue/floder.png" alt="" slot="panelLeftIconImg">
                     <p slot="panelTitleText">业务导航</p>
                     <template slot='panelBody'>
-                        <BusinessPortal></BusinessPortal>
-                        <div class="bottom-buttons-group">
+                        <div class="business-and-apps-wrapper">
+                            <div class="business">
+                                <BusinessPortal></BusinessPortal>
+                            </div>
+                            <div class="mocklogin"></div>
+                        </div>
+                        <div class="bottom-buttons-wrapper">
                             <button type="button" class="btn">功能地图</button>
                             <button type="button" class="btn">组件定制</button>
                         </div>

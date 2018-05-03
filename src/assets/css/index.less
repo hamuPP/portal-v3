@@ -1,42 +1,67 @@
-.homepage{
-  height: 100%;
-}
-.header-wrapper{
-  width: 100%;
-  height: 36px;
-  overflow: hidden;
-  position: fixed;
-}
-
-.left-side{
-  display: block;
-  float: left;
-  width: 300px;
-  min-height: 300px;
-  height: 100%;
-  //background: mediumpurple;
-  padding:47px 10px 10px;
-  .inner-left-wrapper{
+.homepage {
     height: 100%;
-    //background: green;
-  }
-  // 下方的按钮：功能地图 、组件定制等
-  .bottom-buttons-group{
-    height: 48px;
-    .btn{
-      height: 100%;
-    }
-  }
 }
 
-.right-side{
-  display: block;
-  //width: 100%;
-  min-height: 400px;
-  height: 100%;
-  margin: 0 0 0 300px;
-  //padding:47px 10px 10px;
-  padding: 47px 15px 15px 0;
-  //background: #6d7380;
+.header-wrapper {
+    width: 100%;
+    height: 36px;
+    overflow: hidden;
+    position: fixed;
+    z-index: 1;
+}
+
+.left-side {
+    display: block;
+    float: left;
+    width: 300px;
+    min-height: 300px;
+    height: 100%;
+    //background: mediumpurple;
+    padding: 47px 10px 10px;
+    .inner-left-wrapper {
+        height: 100%;
+        //background: green;
+    }
+    .business-and-apps-wrapper {
+        height: -moz-calc(~"100% - 48px");
+        height: -webkit-calc(~"100% - 48px");
+        height: calc(~"100% - 48px");
+        & > .business {
+            height: 50%;
+            overflow-y: auto;
+        }
+        & > .mocklogin {
+            height: 50%;
+            overflow-y: auto;
+            border-top: 1px solid #6ba8dc;
+        }
+    }
+    // 下方的按钮：功能地图 、组件定制等
+    .bottom-buttons-wrapper {
+        height: 48px;
+        border-top: 1px solid #6ba8dc;
+        .btn {
+            height: 100%;
+            width: 50%;
+            border: none;
+            outline: none;
+            cursor: pointer;
+
+            &:nth-child(2n){
+                border-left: 1px solid #6ba8dc;
+            }
+        }
+    }
+}
+
+.right-side {
+    display: block;
+    //width: 100%;
+    min-height: 400px;
+    height: 100%;
+    margin: 0 0 0 300px;
+    //padding:47px 10px 10px;
+    padding: 47px 15px 15px 0;
+    //background: #6d7380;
     overflow-y: auto;
 }

@@ -9,21 +9,30 @@ export const LOGOUT_DATA = 'LOGOUT_DATA';
 export const USER_DATA = 'USER_DATA';
 export const BACKLOGS_DATA = 'BACKLOGS_DATA';
 export const BACKLOGS_TAG_DATA = 'BACKLOGS_TAG_DATA';
+export const FIND_BY_DATE = 'FIND_BY_DATE';
+export const SCHEDULE_ADD_DATE = 'SCHEDULE_ADD_DATE';
+export const SCHEDULE_UPDATE_DATE = 'SCHEDULE_UPDATE_DATE';
 // 变量 end
 
 // 请求地址 --start--
 
 export const API_PRE = 'api/'; // 前端工程中给所有接口前面加上api的字段，因为路由里会将非api开头的路径都当做静态资源去找。
 export const GATEWAY_PORTAL = 'portal/';
+export const GATEWAY_SCHEDULE = 'schedule/'; // 日程
 
 export const GET_BALL_LIST_DATA = 'mockData/ballList.json';
 export const LOGIN = 'login';
 
-export const GET_USER_DATA = GATEWAY_PORTAL + '${account}/enterprise'; //
+export const GET_USER_DATA = GATEWAY_PORTAL + '${account}/enterprise';
 // export const GET_USER_DATA = 'enterprise';
 
 export const GET_BACK_LOGS_DATA = GATEWAY_PORTAL + 'backlogs/${account}';
 export const GET_BACK_LOGS_TAG_DATA = GATEWAY_PORTAL + 'backlogs/${account}/tags';
+
+// 根据传入的日期来查询日程信息
+export const FIND_BY = GATEWAY_SCHEDULE + 'schedule/date/${date}';
+// 添加日程表  请求方式“post”新增；“put”修改；“get”获取所有的日期
+export const SCHEDULE_ADD = `${GATEWAY_SCHEDULE}schedule`;
 // 请求地址 --end--
 
 export const getUrl = function(urlObj) {
