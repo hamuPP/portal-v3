@@ -9,7 +9,8 @@
         <div class="business-portal-cotent">
             <div class="map-list">
                 <draggable >
-                    <span v-for="item in mapListData" >
+                    <!--<span v-for="item in mapListData" >-->
+                    <span v-for="item in list" >
                        {{item.title}}
                     </span>
                 </draggable>
@@ -32,7 +33,7 @@
         },
         data() {
             return {
-                mapListData: []
+                list: []
             }
         },
         components: {
@@ -40,27 +41,53 @@
         },
         computed: mapGetters({
             /* 用户数据数据 */
-            userData: 'userData'
+            userData: 'userData',
+            mapListData: 'mapListData',
         }),
         watch: {
+            mapListData(val){
+                for (let unfix = val.length - 1; unfix > 0; unfix--) {
+                    /*给进度做个记录，比到未确定位置*/
+                    for (let i = 0; i < unfix; i++) {
+                        if (val[i].index > val[i + 1].index) {
+                            let temp = val[i];
+                            val.splice(i, 1, val[i + 1]);
+                            val.splice(i + 1, 1, temp);
+                        }
+                    }
+                }
+                this.list = val;
+            },
         },
         methods: {
-            getFunctionMapData () {
-                let that = this;
-//                let reqData = {
-//                    url: 'FUNC',
-//                    data: {
-//                        userId: me.userData.account
-//                    }
-//                };
-//                that.$store.dispatch('getFuncData', {reqData});
+//             getFunctionMapData () {
+//                 let that = this;
+// //                let reqData = {
+// //                    url: 'FUNC',
+// //                    data: {
+// //                        userId: me.userData.account
+// //                    }
+// //                };
+// //                that.$store.dispatch('getFuncData', {reqData});
+//
+// //                let newData = {
+// //                    func: this.functionMapData,
+// //                    data: data
+// //                };
+// //                that.$store.dispatch('manageDataFunc', {newData});
+//             }
 
-//                let newData = {
-//                    func: this.functionMapData,
-//                    data: data
-//                };
-//                that.$store.dispatch('manageDataFunc', {newData});
-            }
+            /**
+             * 获取到业务入口文件
+             * @param data
+             */
+            getList(data) {
+                let newData = {
+                    func: this.functionMapData,
+                    data: data
+                };
+                this.$store.dispatch('manageDataFunc', {newData});
+            },
         },
         created() {
             let that = this;
