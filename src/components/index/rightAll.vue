@@ -19,7 +19,7 @@
                 <img src="../../assets/images/skin-blue/calendar.png" alt="" slot="panelLeftIconImg">
                 <p slot="panelTitleText">日程表</p>
                 <template slot='panelBody'>
-                    <Calendar></Calendar>
+                    <CalenderSchedule></CalenderSchedule>
                 </template>
             </basicPanel>
         </div>
@@ -71,7 +71,7 @@
 <script>
     import basicPanel from '../tpl/basicPanel.vue';
     import TodoList from '../todolist/todolist.vue';
-    import Calendar from '../calendar/calendar.vue';
+    import CalenderSchedule from '../calenderSchedule/calenderSchedule.vue';
     import Notice from '../notice/notice.vue';
 
     export default {
@@ -79,7 +79,7 @@
         components: {
             basicPanel,
             TodoList,
-            Calendar,
+            CalenderSchedule,
             Notice
         }
     }

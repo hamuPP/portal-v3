@@ -11,12 +11,15 @@ const state = {
     updateTaskDate: {},
     /* 删除日程表数据 */
     deleteTaskDate: '',
+    /* 全部日程的数据 */
+    allTaskDate: []
 };
 const getters = {
     taskList: state => state.taskList,
     addTaskDate: state => state.addTaskDate,
     updateTaskDate: state => state.updateTaskDate,
     deleteTaskDate: state => state.deleteTaskDate,
+    allTaskDate: state => state.allTaskDate,
 };
 const actions = {
     getTaskList({commit}, {reqData}) {
@@ -117,20 +120,64 @@ const actions = {
      * @param reqData
      */
     deleteTaskData({ commit }, { reqData }) {
-        expAxios.sendRequest({
-            url: common.getUrl({ url: common.SCHEDULE_DELETE, params: String(reqData) }),
-            method: 'delete',
-            success: data => {
-                let newData = "";
-                if (data && data.meta && parseInt(data.meta.code) === 1) {
-                    newData = state.deleteTaskDate + parseInt(data.meta.code);
-                    new commonMethods().showToastMsg({ text: data.meta.message, priority: 'success' });
-                } else {
-                    new commonMethods().showToastMsg({ text: data.meta.message, priority: 'error' });
+        let url = common.getUrl(
+            {
+                url: common.SCHEDULE_DELETE,
+                queryParams: {
+                    id: reqData.ids
                 }
-                commit(common.SCHEDULE_DELETE_DATE, { resData: newData });
             }
+        );
+        axios({
+            method: 'delete',
+            url: url
+        }).then(res => {
+            commit(common.SCHEDULE_DELETE_DATE, {data: res});
+        }).catch(e => {
+            commit(common.SCHEDULE_DELETE_DATE, {data: e});
         });
+
+        // expAxios.sendRequest({
+        //     url: common.getUrl({ url: common.SCHEDULE_DELETE, params: String(reqData) }),
+        //     method: 'delete',
+        //     success: data => {
+        //         let newData = "";
+        //         if (data && data.meta && parseInt(data.meta.code) === 1) {
+        //             newData = state.deleteTaskDate + parseInt(data.meta.code);
+        //             new commonMethods().showToastMsg({ text: data.meta.message, priority: 'success' });
+        //         } else {
+        //             new commonMethods().showToastMsg({ text: data.meta.message, priority: 'error' });
+        //         }
+        //         commit(common.SCHEDULE_DELETE_DATE, { resData: newData });
+        //     }
+        // });
+    },
+
+    /**
+     * 获取所有日程下得所有日期
+     * @param commit9
+     * @param reqData
+     */
+    getAllTaskData({ commit }) {
+        let url = common.getUrl({url: common.SCHEDULE_ADD});
+        axios({
+            method: 'get',
+            url: url,
+        }).then(res => {
+            commit(common.SCHEDULE_ALL_DATE, {data: res});
+        }).catch(e => {
+            commit(common.SCHEDULE_ALL_DATE, {data: e});
+        });
+        // expAxios.sendRequest({
+        //     url: common.getUrl({ url: common.SCHEDULE_ADD }),
+        //     success: data => {
+        //         let newData = [];
+        //         if (data && data.meta && parseInt(data.meta.code) === 1) {
+        //             newData = data.data;
+        //         }
+        //         commit(common.SCHEDULE_ALL_DATE, { resData: newData });
+        //     }
+        // });
     },
 };
 const mutations = {
@@ -142,7 +189,13 @@ const mutations = {
     },
     [common.SCHEDULE_UPDATE_DATE](state, {data}) {
         state.updateTaskDate = data;
-    }
+    },
+    [common.SCHEDULE_DELETE_DATE](state, {data}) {
+        state.deleteTaskDate = data;
+    },
+    [common.SCHEDULE_ALL_DATE](state, { resData }) {
+        state.allTaskDate = resData;
+    },
 };
 export default {
     state,

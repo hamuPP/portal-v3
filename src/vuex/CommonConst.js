@@ -12,6 +12,8 @@ export const BACKLOGS_TAG_DATA = 'BACKLOGS_TAG_DATA';
 export const FIND_BY_DATE = 'FIND_BY_DATE';
 export const SCHEDULE_ADD_DATE = 'SCHEDULE_ADD_DATE';
 export const SCHEDULE_UPDATE_DATE = 'SCHEDULE_UPDATE_DATE';
+export const SCHEDULE_DELETE_DATE = 'SCHEDULE_DELETE_DATE';
+export const SCHEDULE_ALL_DATE = 'SCHEDULE_ALL_DATE';
 // 变量 end
 
 // 请求地址 --start--
@@ -33,6 +35,8 @@ export const GET_BACK_LOGS_TAG_DATA = GATEWAY_PORTAL + 'backlogs/${account}/tags
 export const FIND_BY = GATEWAY_SCHEDULE + 'schedule/date/${date}';
 // 添加日程表  请求方式“post”新增；“put”修改；“get”获取所有的日期
 export const SCHEDULE_ADD = `${GATEWAY_SCHEDULE}schedule`;
+// 日程表删除 请求方式“delete”
+export const SCHEDULE_DELETE = GATEWAY_SCHEDULE + 'schedule/${id}';
 // 请求地址 --end--
 
 export const getUrl = function(urlObj) {
