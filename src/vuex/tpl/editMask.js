@@ -37,10 +37,16 @@ const actions = {
             url: url,
             data: reqData.data,
         }).then(res => {
-            //todo 区分
-            commit(common.SCHEDULE_DELETE_DATE, {data: res});
+            // todo 区分
+            if (reqData.type === 'put') {
+                commit(common.GET_ID_EDIT_DATA, {data: res});
+            } else if (reqData.type === 'delete') {
+                commit(common.GET_ID_COMPONENT, {data: res});
+            } else { /* 获取组件里面的数据 */
+                commit(common.SCHEDULE_DELETE_DATE, {data: res});
+            }
         }).catch(e => {
-            commit(common.SCHEDULE_DELETE_DATE, {data: e});
+            commit(common.GET_ID_LIST_DATA, {data: e});
         });
     }
 };

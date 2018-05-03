@@ -17,6 +17,13 @@ export const SCHEDULE_ALL_DATE = 'SCHEDULE_ALL_DATE';
 export const GET_ID_COMPONENT = 'GET_ID_COMPONENT';
 export const GET_ID_EDIT_DATA = 'GET_ID_EDIT_DATA';
 export const GET_ID_LIST_DATA = 'GET_ID_LIST_DATA';
+/* 判断右侧模板是否出现覆盖层 进行编辑组件 */
+export const SHOW_EDIT_MASK = 'SHOW_EDIT_MASK';
+export const HIDE_EDIT_MASK = 'HIDE_EDIT_MASK';
+/* 日历控件的 */
+export const CALENDAR_SHOW = 'CALENDAR_SHOW';
+export const CALENDAR_PROP = 'CALENDAR_PROP';
+export const CALENDAR_NOW = 'CALENDAR_NOW';
 // 变量 end
 
 // 请求地址 --start--

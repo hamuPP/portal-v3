@@ -6,8 +6,10 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 /* 首页 Vuex对象 */
 import homePage from './homepage/homepage'
+import homePageRightAllJs from './homepage/rightAll'
 import loginJs from './login/login'
 import todolistJs from './todolist/todolist'
+import calenderJs from './calendarSchedule/calendar' // 以前的calendar/calendar.js
 import calenderScheduleJs from './calendarSchedule/calenderSchedule'
 import editMaskJs from './tpl/editMask'
 import mockLoginJs from './login/mockLogin'
@@ -18,8 +20,10 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     modules: {
         homePage,
+        homePageRightAllJs,
         loginJs,
         todolistJs,
+        calenderJs,
         calenderScheduleJs,
         editMaskJs,
         mockLoginJs

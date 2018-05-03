@@ -43,10 +43,12 @@
         props: {
             dateTimeData: {
                 type: Object,
-                default: {
-                    posTop: 0,
-                    show: true,
-                    nowPick: new Date()
+                default: function () {
+                    return {
+                        posTop: 0,
+                        show: true,
+                        nowPick: new Date()
+                    }
                 }
             },
             selectTimeData: {
