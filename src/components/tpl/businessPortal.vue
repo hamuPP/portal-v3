@@ -88,6 +88,16 @@
                 };
                 this.$store.dispatch('manageDataFunc', {newData});
             },
+
+            getFunctionMapData() {
+                let reqData = {
+                    url: 'FUNC',
+                    data: {
+                        userId: val.account
+                    }
+                };
+                me.$store.dispatch('getFuncData', {reqData});
+            },
         },
         created() {
             let that = this;
