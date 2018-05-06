@@ -8,18 +8,21 @@
     <div class="business-portal-wrapper">
         <div class="business-portal-cotent">
             <div class="common-list">
+                <img :data-src="testMe" ref='funcImgs' alt="">
+                <div style="width: 100px;height: 100px;" ref="ddd"></div>
+                <img src="../../assets/images/skin-blue/blockdevice.png" alt="">
+
                 <draggable >
-                    <!--<span v-for="item in mapListData" >-->
-                    <div class='common-list-group' v-for="fun in activedDataList" >
-                        <!--<div class="common-list-group-img">-->
-                        <div class="common-list-group-img" v-html="fun.icon">
-                            <!--<img src="../../assets/images/skin-blue/blockdevice.png" alt="">-->
-                        </div>
-                        <div class="common-list-group-text">
+                    <basicList v-for="fun in activedDataList">
+                        <img slot="img"
+                             :data-src="fun.icon"
+                             :src="fun.icon"
+                             class="func-imgs"
+                             alt="">
+                        <template slot="text">
                             {{fun.resName}}
-                            <img src="../../assets/images/skin-blue/blockdevice.png" alt="">
-                        </div>
-                    </div>
+                        </template>
+                    </basicList>
                 </draggable>
             </div>
         </div>
@@ -29,6 +32,7 @@
 <script>
     import iconsJson from '../../mockData/iconsJson.json';
     import draggable from 'vuedraggable';
+    import basicList from '../tpl/basicList.vue';
     import {mapGetters} from 'vuex'
 
     export default {
@@ -40,11 +44,14 @@
         },
         data() {
             return {
+                funcImgs: [],
+                testMe: '/resources/briefcase.png',
                 list: [],
                 activedDataList: [] // 业务导航的数据,
             }
         },
         components: {
+            basicList,
             draggable
         },
         computed: mapGetters({
@@ -54,9 +61,20 @@
             functionMapData: 'functionMapData',
         }),
         watch: {
+            funcImgs(val) {
+                debugger;
+                console.log('ff', val);
+                console.log('ff', val.length);
+            },
+
+            'funcImgs.length': (val) => {
+                debugger;
+                console.log('ff', val);
+                console.log('ff', val.length);
+            },
+
             functionMapData(val) {
                 let that = this;
-                debugger;
                 console.log('functionMapData', val);
                 let rawData = val.data;
                 let activedDataArr = [];
@@ -169,7 +187,12 @@
                 });
 
                 console.log('cc', data);
+                that.testMe = iconsDataArr[1];
 
+                let newImg = new Image();
+                newImg.setAttribute('src', iconsDataArr[1]);
+                console.log(that.$refs.ddd);
+                that.$refs.ddd.appendChild(newImg)
                 return data;
             }
         },
@@ -185,6 +208,29 @@
 
             // 获取业务导航中的数据
             this.getFunctionMapData();
+        },
+
+        mounted() {
+            let that = this;
+
+            let imgsArr = that.$refs.funcImgs;
+            console.log('imgsArr', imgsArr);
+            that.$nextTick(() => {
+                // debugger;
+                // console.log('imgsArr', that.$refs.funcImgs);
+                // console.log('imgsArr', document.getElementsByClassName('func-imgs'));
+                let funcImgs = that.funcImgs = document.getElementsByClassName('func-imgs');
+                console.warn(funcImgs);
+                debugger;
+                console.warn(funcImgs.length);
+
+                for (let i = 0; i < funcImgs.length; i++) {
+                    let img = funcImgs[i];
+                    console.warn(img)
+                    let dataSrc = img.getAttribute('data-src');
+                    img.setAttribute('src', dataSrc);
+                }
+            })
         }
     }
 </script>
