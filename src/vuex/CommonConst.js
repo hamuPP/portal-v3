@@ -24,6 +24,8 @@ export const HIDE_EDIT_MASK = 'HIDE_EDIT_MASK';
 export const CALENDAR_SHOW = 'CALENDAR_SHOW';
 export const CALENDAR_PROP = 'CALENDAR_PROP';
 export const CALENDAR_NOW = 'CALENDAR_NOW';
+/* 功能地图 */
+export const FUNCTION_MAP_DATA = 'FUNCTION_MAP_DATA';
 // 变量 end
 
 // 请求地址 --start--
@@ -54,6 +56,11 @@ export const SCHEDULE_DELETE = GATEWAY_SCHEDULE + 'schedule/${id}';
  * @type {string}
  */
 export const IDCOMPONENT = GATEWAY_PORTAL + 'resource/${userId}/${id}/component';
+/**
+ * 获取业务定制的所有功能 请求方式“get”
+ * @type {string}
+ */
+export const FUNC = GATEWAY_PORTAL + 'resources/${userId}/functions';
 // 请求地址 --end--
 
 export const getUrl = function(urlObj) {

@@ -7,12 +7,19 @@
 <template>
     <div class="business-portal-wrapper">
         <div class="business-portal-cotent">
-            <div class="map-list">
+            <div class="common-list">
                 <draggable >
                     <!--<span v-for="item in mapListData" >-->
-                    <span v-for="item in list" >
-                       {{item.title}}
-                    </span>
+                    <div class='common-list-group' v-for="fun in activedDataList" >
+                        <!--<div class="common-list-group-img">-->
+                        <div class="common-list-group-img" v-html="fun.icon">
+                            <!--<img src="../../assets/images/skin-blue/blockdevice.png" alt="">-->
+                        </div>
+                        <div class="common-list-group-text">
+                            {{fun.resName}}
+                            <img src="../../assets/images/skin-blue/blockdevice.png" alt="">
+                        </div>
+                    </div>
                 </draggable>
             </div>
         </div>
@@ -20,7 +27,7 @@
     </div>
 </template>
 <script>
-    import json from '../../mockData/businessPortalMaplistData.json';
+    import iconsJson from '../../mockData/iconsJson.json';
     import draggable from 'vuedraggable';
     import {mapGetters} from 'vuex'
 
@@ -33,7 +40,8 @@
         },
         data() {
             return {
-                list: []
+                list: [],
+                activedDataList: [] // 业务导航的数据,
             }
         },
         components: {
@@ -42,12 +50,55 @@
         computed: mapGetters({
             /* 用户数据数据 */
             userData: 'userData',
-            mapListData: 'mapListData',
+//            mapListData: 'mapListData',
+            functionMapData: 'functionMapData',
         }),
         watch: {
-            mapListData(val){
+            functionMapData(val) {
+                let that = this;
+                debugger;
+                console.log('functionMapData', val);
+                let rawData = val.data;
+                let activedDataArr = [];
+                if (rawData && rawData.meta && rawData.meta.code === 1) {
+                    let listAllArr = that.getGeneratedListData(rawData.data);
+
+                    // 提出其中激活的数据，放入业务导航中
+                    // resourceType - 0:应用,1:功能,2:功能包
+                    listAllArr.forEach(it => {
+                        let children = it.children || [];
+                        children.forEach(child => {
+                            if (child.activeStatus === 0 && !child.parentId) {
+                                let newList = {
+                                    customizationId: child.customizationId,
+                                    userId: child.userId,
+                                    index: child.index,
+                                    activeStatus: child.activeStatus,
+                                    resourceType: child.resourceType,
+                                    packageName: child.packageName,
+                                    children: []
+                                };
+
+                                if (child.resourceType === 2) {
+                                    newList.children.push(child);
+                                    children.forEach(cld => {
+                                        if (cld.parentId === child.customizationId) {
+                                            newList.children.push(cld);
+                                        }
+                                    });
+                                } else {
+                                    newList = child;
+                                }
+                                activedDataArr.push(newList);
+                            }
+                        });
+                    });
+                }
+                that.activedDataList = activedDataArr
+            },
+            mapListData(val) {
                 for (let unfix = val.length - 1; unfix > 0; unfix--) {
-                    /*给进度做个记录，比到未确定位置*/
+                    /* 给进度做个记录，比到未确定位置 */
                     for (let i = 0; i < unfix; i++) {
                         if (val[i].index > val[i + 1].index) {
                             let temp = val[i];
@@ -90,18 +141,41 @@
             },
 
             getFunctionMapData() {
+                let that = this;
                 let reqData = {
-                    url: 'FUNC',
-                    data: {
-                        userId: val.account
-                    }
+                    userId: that.account
                 };
-                me.$store.dispatch('getFuncData', {reqData});
+                that.$store.dispatch('getFuncData', {reqData});
             },
+
+            getGeneratedListData(data) {
+                let that = this;
+                // 随机的字体图标
+                let iconsDataArr = iconsJson.data;
+                let sum = 0;
+                data.forEach(item => {
+                    sum++;
+                    let children = item.children ? item.children : [];
+                    if (children.length) {
+                        children.forEach(jtem => {
+                            jtem.styleId = 1;
+                            /* 17 为随机图标的长度 */
+                            jtem.icon = iconsDataArr[sum > 16 ? sum = 0 : sum];
+                            jtem.activeStatus = jtem.activeStatus === 0 ? jtem.activeStatus : 1;
+                            jtem.resourceType = jtem.resourceType ? jtem.resourceType : 1;
+                            sum++;
+                        });
+                    }
+                });
+
+                console.log('cc', data);
+
+                return data;
+            }
         },
         created() {
             let that = this;
-            that.mapListData = json.data;
+//            that.mapListData = json.data;
             let userDataFromBackEnd = this.userData.data;
             if (userDataFromBackEnd && userDataFromBackEnd.data && userDataFromBackEnd.data.account) {
                 this.account = userDataFromBackEnd.data.account;

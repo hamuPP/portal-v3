@@ -8,6 +8,7 @@ import Vuex from 'vuex'
 import homePage from './homepage/homepage'
 import homePageRightAllJs from './homepage/rightAll'
 import loginJs from './login/login'
+import functionMapJs from './functionMap/functionMap'
 import todolistJs from './todolist/todolist'
 import calenderJs from './calendarSchedule/calendar' // 以前的calendar/calendar.js
 import calenderScheduleJs from './calendarSchedule/calenderSchedule'
@@ -22,6 +23,7 @@ export default new Vuex.Store({
         homePage,
         homePageRightAllJs,
         loginJs,
+        functionMapJs,
         todolistJs,
         calenderJs,
         calenderScheduleJs,
