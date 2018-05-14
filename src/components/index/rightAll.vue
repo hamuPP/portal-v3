@@ -19,7 +19,7 @@
                 <img src="../../assets/images/skin-blue/calendar.png" alt="" slot="panelLeftIconImg">
                 <p slot="panelTitleText">日程表</p>
                 <template slot='panelBody'>
-                    <CalenderSchedule></CalenderSchedule>
+                    <!--<CalenderSchedule></CalenderSchedule>-->
                 </template>
             </basicPanel>
         </div>

@@ -8,25 +8,23 @@
     <div class="business-portal-wrapper">
         <div class="business-portal-cotent">
             <div class="common-list">
-                <img :data-src="testMe" ref='funcImgs' alt="">
-                <div style="width: 100px;height: 100px;" ref="ddd"></div>
-                <img src="../../assets/images/skin-blue/blockdevice.png" alt="">
-
-                <draggable >
-                    <basicList v-for="fun in activedDataList">
-                        <img slot="img"
-                             :data-src="fun.icon"
-                             :src="fun.icon"
-                             class="func-imgs"
-                             alt="">
-                        <template slot="text">
-                            {{fun.resName}}
-                        </template>
-                    </basicList>
-                </draggable>
+                <template v-for="fun in activedDataList">
+                    <draggable >
+                        <basicList class="list-col-3">
+                            <img slot="img"
+                                 :data-src="fun.icon"
+                                 :src="fun.icon"
+                                 class="func-imgs"
+                                 alt="">
+                            <template slot="text">
+                                {{fun.resName || fun.packageName}}
+                            </template>
+                        </basicList>
+                    </draggable>
+                </template>
             </div>
         </div>
-        <div class="business-portal-btns"></div>
+        <!--<div class="business-portal-btns"></div>-->
     </div>
 </template>
 <script>
@@ -44,8 +42,6 @@
         },
         data() {
             return {
-                funcImgs: [],
-                testMe: '/resources/briefcase.png',
                 list: [],
                 activedDataList: [] // 业务导航的数据,
             }
@@ -61,26 +57,12 @@
             functionMapData: 'functionMapData',
         }),
         watch: {
-            funcImgs(val) {
-                debugger;
-                console.log('ff', val);
-                console.log('ff', val.length);
-            },
-
-            'funcImgs.length': (val) => {
-                debugger;
-                console.log('ff', val);
-                console.log('ff', val.length);
-            },
-
             functionMapData(val) {
                 let that = this;
-                console.log('functionMapData', val);
                 let rawData = val.data;
                 let activedDataArr = [];
                 if (rawData && rawData.meta && rawData.meta.code === 1) {
                     let listAllArr = that.getGeneratedListData(rawData.data);
-
                     // 提出其中激活的数据，放入业务导航中
                     // resourceType - 0:应用,1:功能,2:功能包
                     listAllArr.forEach(it => {
@@ -94,6 +76,7 @@
                                     activeStatus: child.activeStatus,
                                     resourceType: child.resourceType,
                                     packageName: child.packageName,
+                                    icon: child.icon,
                                     children: []
                                 };
 
@@ -176,29 +159,23 @@
                     let children = item.children ? item.children : [];
                     if (children.length) {
                         children.forEach(jtem => {
+                            let srcText = iconsDataArr[sum > 15 ? sum = 0 : sum];
                             jtem.styleId = 1;
+
                             /* 17 为随机图标的长度 */
-                            jtem.icon = iconsDataArr[sum > 16 ? sum = 0 : sum];
+//                            jtem.icon = require(srcText);
+                            jtem.icon = require('../../assets/images/skin-blue/' + srcText);
                             jtem.activeStatus = jtem.activeStatus === 0 ? jtem.activeStatus : 1;
                             jtem.resourceType = jtem.resourceType ? jtem.resourceType : 1;
                             sum++;
                         });
                     }
                 });
-
-                console.log('cc', data);
-                that.testMe = iconsDataArr[1];
-
-                let newImg = new Image();
-                newImg.setAttribute('src', iconsDataArr[1]);
-                console.log(that.$refs.ddd);
-                that.$refs.ddd.appendChild(newImg)
                 return data;
             }
         },
         created() {
             let that = this;
-//            that.mapListData = json.data;
             let userDataFromBackEnd = this.userData.data;
             if (userDataFromBackEnd && userDataFromBackEnd.data && userDataFromBackEnd.data.account) {
                 this.account = userDataFromBackEnd.data.account;
@@ -212,25 +189,6 @@
 
         mounted() {
             let that = this;
-
-            let imgsArr = that.$refs.funcImgs;
-            console.log('imgsArr', imgsArr);
-            that.$nextTick(() => {
-                // debugger;
-                // console.log('imgsArr', that.$refs.funcImgs);
-                // console.log('imgsArr', document.getElementsByClassName('func-imgs'));
-                let funcImgs = that.funcImgs = document.getElementsByClassName('func-imgs');
-                console.warn(funcImgs);
-                debugger;
-                console.warn(funcImgs.length);
-
-                for (let i = 0; i < funcImgs.length; i++) {
-                    let img = funcImgs[i];
-                    console.warn(img)
-                    let dataSrc = img.getAttribute('data-src');
-                    img.setAttribute('src', dataSrc);
-                }
-            })
         }
     }
 </script>

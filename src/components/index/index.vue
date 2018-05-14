@@ -19,17 +19,23 @@
             <div class="inner-left-wrapper">
                 <basicPanel radius>
                     <img src="../../assets/images/skin-blue/floder.png" alt="" slot="panelLeftIconImg">
-                    <p slot="panelTitleText">业务导航</p>
+                    <p slot="panelTitleText">业务导航{{showFunctionMapButtons}}</p>
                     <template slot='panelBody'>
                         <div class="business-and-apps-wrapper">
-                            <div class="business">
+                            <div class="business" :style="computedBusinessStyle">
                                 <BusinessPortal></BusinessPortal>
                             </div>
-                            <div class="mocklogin"></div>
+                            <div class="mocklogin" ref="mockLogin" v-show="!showFunctionMapButtons"></div>
                         </div>
                         <div class="bottom-buttons-wrapper">
-                            <button type="button" class="btn">功能地图</button>
-                            <button type="button" class="btn">组件定制</button>
+                            <template v-if="showFunctionMapAndComponentsButtons">
+                                <button type="button" class="btn" @click="showFunctionMap">功能地图</button>
+                                <button type="button" class="btn">组件定制</button>
+                            </template>
+                            <template v-if="showFunctionMapButtons">
+                                <button type="button" class="btn function-map-btn-success" @click="functionMapCustormed">定制完成</button>
+                                <button type="button" class="btn function-map-btn-cancle" @click="functionMapCancle">取消定制</button>
+                            </template>
                         </div>
                     </template>
                 </basicPanel>
@@ -79,10 +85,66 @@
 //             editComponent,
 //             pwdTpl
         },
-        methods: {},
+        data() {
+            return {
+                computedBusinessStyle: '',
+                showFunctionMapAndComponentsButtons: true,
+                showFunctionMapButtons: false, // 是否显示功能地图的2个操作按钮：定制完成 取消定制
+            }
+        },
+        watch: {
+            '$route': function(val) {
+                console.log('watch path', val);
+            },
+            showFunctionMapButtons(val) {
+                console.log('watch showFunctionMapButtons', val);
+                let that = this;
+                if (val) {
+                    that.computedBusinessStyle = 'height: 100%';
+                }
+            }
+        },
+        methods: {
+            showFunctionMap() {
+                let that = this;
+                that.showFunctionMapButtons = true;
+                that.showFunctionMapAndComponentsButtons = false;
+                that.$router.push({path: 'index/functionMap'});
+            },
+
+            /**
+             * 功能地图：定制完成
+             */
+            functionMapCustormed() {
+                let that = this;
+
+                that.showFunctionMapButtons = false;
+                that.showFunctionMapAndComponentsButtons = true;
+            },
+
+            /**
+             * 功能地图：取消定制
+             */
+            functionMapCancle() {
+                let that = this;
+                that.showFunctionMapButtons = false;
+                that.showFunctionMapAndComponentsButtons = true;
+            },
+        },
         mounted() {
         },
         created() {
+            let that = this;
+            console.log('watch path', this.$route);
+            // 是否是功能地图全屏页面, 要根据这个是否显示左侧一列的下方的几个按钮
+            let isFunctionMapFullpage = this.$route.path === '/index/functionMap';
+            if (isFunctionMapFullpage) {
+                that.showFunctionMapButtons = true;
+                that.showFunctionMapAndComponentsButtons = false;
+            } else {
+                that.showFunctionMapButtons = false;
+                that.showFunctionMapAndComponentsButtons = true;
+            }
         }
     }
 </script>

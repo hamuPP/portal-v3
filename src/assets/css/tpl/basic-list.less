@@ -1,18 +1,48 @@
-.common-list{
-  overflow: hidden;
+.common-list {
+    overflow: hidden;
 }
-.common-list-group{
-  display: block;
-  float: left;
-  width: 33.333%;
-  border: 1px solid red;
-  .common-list-group-img{
-    img{
-      width: 42px;
-      height: 42px;
-    }
-  }
-  .common-list-group-text{
 
-  }
+.common-list-group {
+    display: block;
+    float: left;
+    //border: 1px solid red;
+    //padding: 10px;
+    //background: pink;
+    padding: 5px;
+    text-align: center;
+    &.list-col-3 {
+        width: 33.333%;
+
+    }
+    .common-list-content{
+        height: 100%;
+        cursor: pointer;
+        padding: 10px 0 0;
+    }
+    .common-list-group-img {
+        img {
+            width: 42px;
+            height: 42px;
+        }
+    }
+    .common-list-group-text {
+        font-size: .8rem;
+        color: #333;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    &.active{
+        .common-list-content{
+            background-color: #aed0ff;
+            border: 1px solid #407DD1;
+        }
+
+    }
+    &:hover{
+        .common-list-content{
+            background-color: #8997ab;
+            color: #ffffff;
+        }
+    }
 }

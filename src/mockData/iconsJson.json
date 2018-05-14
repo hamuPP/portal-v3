@@ -1,19 +1,20 @@
 {
 	"data": [
-		"../../assets/images/skin-blue/blockdevice.png",
-		"../../assets/images/skin-blue/briefcase.png",
-		"../../assets/images/skin-blue/Computer.png",
-		"../../assets/images/skin-blue/file-cabinet.png",
-		"../../assets/images/skin-blue/folder-documents.png",
-		"../../assets/images/skin-blue/folder-images.png",
-		"../../assets/images/skin-blue/folder-tar.png",
-		"../../assets/images/skin-blue/Hardware-Chip.png",
-		"../../assets/images/skin-blue/Home-Server.png",
-		"../../assets/images/skin-blue/pie-chart.png",
-		"../../assets/images/skin-blue/project-plan.png",
-		"../../assets/images/skin-blue/Security-Camera.png",
-		"../../assets/images/skin-blue/store.png",
-		"../../assets/images/skin-blue/Toolbox-Red.png",
-		"../../assets/images/skin-blue/notes.png"
+		"bar chart.png",
+		"blockdevice.png",
+		"briefcase.png",
+		"Computer.png",
+		"file cabinet.png",
+		"folder documents.png",
+		"folder images.png",
+		"folder tar.png",
+		"Hardware Chip.png",
+		"Home Server.png",
+		"pie chart.png",
+		"project plan.png",
+		"Security Camera.png",
+		"store.png",
+		"Toolbox Red.png",
+		"notes.png"
 	]
 }

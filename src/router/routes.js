@@ -29,7 +29,7 @@ const routes = [
                 }
             },
             {
-                path: '/functionMap',
+                path: 'functionMap',
                 components: {
                     main: functionMapRightAll
                     // a:RightModel,

@@ -1,0 +1,74 @@
+.functionmap-rightall-container{
+    //background: pink;
+    height: 100%;
+    border: 1px solid #6c80dc;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 25px 25px 0;
+    overflow: hidden;
+    .functionmap-header{
+        overflow: hidden;
+        padding: 0 0 25px;
+        border-bottom: 1px solid #dcdcdc;
+        .title-text{
+            float: left;
+            font-size: 24px;
+            //border: 1px solid darkred;
+            margin: 0 30px 0 0;
+        }
+        .search-box{
+            //height: 26px;
+            float: left;
+            //border: 1px solid green;
+            padding-top: 5px;
+
+            //.ivu-input{
+            //    height: 24px;
+            //    //color: red;
+            //}
+
+        }
+        .icon-and-list-display{
+            float: right;
+            //border: 1px solid rebeccapurple;
+            padding: 5px 0 0;
+            .item{
+                cursor: pointer;
+                width: 100px;
+                //height: 50px;
+                float: left;
+                background: #F0F0F0;
+                color: #333;
+                &.active {
+                    background: #407DD1;
+                    color: #fff;
+                }
+            }
+        }
+    }
+    .functionmap-body{
+        height:-moz-calc(~"100% - 80px");
+        height:-webkit-calc(~"100% - 80px");
+        height:calc(~"100% - 80px");
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+}
+/* 重写功能地图全屏右边的小方片的样式 */
+.func-children-box{
+    overflow: hidden;
+    //border: 1px solid red;
+    text-align: center;
+}
+.functionmap-rightall-func-items{
+    width: 96px !important;
+    height: 96px !important;
+    //display: inline-block !important;
+    //float: none !important;
+    //border: 1px solid green;
+}
+.func-imgs{
+    width: 26px;
+    height: 26px;
+}
